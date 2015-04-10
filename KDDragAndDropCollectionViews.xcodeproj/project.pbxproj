@@ -14,6 +14,7 @@
 		BE3603C01AD7DE06005EE44C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3603BE1AD7DE06005EE44C /* LaunchScreen.xib */; };
 		BE3603CC1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */; };
 		BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */; };
+		BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		BE3603CA1AD7DE06005EE44C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewsTests.swift; sourceTree = "<group>"; };
 		BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropManager.swift; sourceTree = "<group>"; };
+		BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */,
+				BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */,
 			);
 			name = KDDragAndDropCollectionViews;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */,
 				BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */,
 				BE3603B81AD7DE06005EE44C /* ViewController.swift in Sources */,
 				BE3603B61AD7DE06005EE44C /* AppDelegate.swift in Sources */,

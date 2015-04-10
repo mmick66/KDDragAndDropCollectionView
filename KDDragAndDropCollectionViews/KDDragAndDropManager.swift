@@ -10,8 +10,8 @@ import UIKit
 
 @objc protocol KDDraggable {
     func canDragAtPoint(point : CGPoint) -> Bool
-    func representationImageAtIndexPath(indexPath : NSIndexPath) -> UIImageView
-    func dataItemAtIndexPath(indexPath : NSIndexPath) -> AnyObject
+    func representationImageAtPoint(point : CGPoint) -> UIView?
+    func dataItemAtPoint(point : CGPoint) -> AnyObject?
 }
 
 @objc protocol KDDroppable {
@@ -31,7 +31,6 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     
     struct Bundle {
         var offset : CGPoint = CGPointZero
-        var indexPath : NSIndexPath
         var sourceCollectionView : UICollectionView
         var overCollectionView : UICollectionView?
         var representationImageView : UIView
@@ -58,37 +57,36 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
             
             if cv is KDDraggable {
                 
-                let pointOnCanvas = touch.locationInView(self.canvas)
+                let touchPointInCollectionView = touch.locationInView(cv)
                 
-                let collectionViewFrameOnCanvas = self.canvas.convertRect(cv.frame, fromView: cv)
-                
-                if CGRectContainsPoint(collectionViewFrameOnCanvas, pointOnCanvas) {
+                if CGRectContainsPoint(cv.frame, touchPointInCollectionView) {
                     
-                    if let indexPath = cv.indexPathForItemAtPoint(pointOnCanvas) { // if we are actually pressing on a cell
-                        
-                        let representation = (cv as KDDraggable).representationImageAtIndexPath(indexPath)
+                    if let representation = (cv as KDDraggable).representationImageAtPoint(touchPointInCollectionView) {
                         
                         representation.frame = self.canvas.convertRect(representation.frame, fromView: cv)
                         
+                        let pointOnCanvas = touch.locationInView(self.canvas)
+                        
                         let offset = CGPointMake(pointOnCanvas.x - representation.frame.origin.x, pointOnCanvas.y - representation.frame.origin.x)
                         
-                        let dataItem : AnyObject = (cv as KDDraggable).dataItemAtIndexPath(indexPath)
+                        if let dataItem : AnyObject = (cv as KDDraggable).dataItemAtPoint(touchPointInCollectionView) {
+                            
+                            self.bundle = Bundle(
+                                offset: offset,
+                                sourceCollectionView: cv,
+                                overCollectionView : (cv is KDDroppable ? cv : nil),
+                                representationImageView: representation,
+                                dataItem : dataItem
+                            )
+                            
+                        } // if let dataItem : AnyObject = ...
                         
-                        self.bundle = Bundle(
-                            offset: offset,
-                            indexPath: indexPath,
-                            sourceCollectionView: cv,
-                            overCollectionView : (cv is KDDroppable ? cv : nil),
-                            representationImageView: representation,
-                            dataItem : dataItem
-                        )
                         
-                    } // if let indexPath ...
+                    } // if let representation = ...
                     
                     
-                } // if CGRectContainsPoint...
+                } // if CGRectContainsPoint ...
                 
-                println("\(bundle)")
             }
             
             
