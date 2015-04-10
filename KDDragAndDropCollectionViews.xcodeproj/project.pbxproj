@@ -13,6 +13,7 @@
 		BE3603BD1AD7DE06005EE44C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3603BC1AD7DE06005EE44C /* Images.xcassets */; };
 		BE3603C01AD7DE06005EE44C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3603BE1AD7DE06005EE44C /* LaunchScreen.xib */; };
 		BE3603CC1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */; };
+		BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		BE3603C51AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KDDragAndDropCollectionViewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3603CA1AD7DE06005EE44C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewsTests.swift; sourceTree = "<group>"; };
+		BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		BE3603B21AD7DE06005EE44C /* KDDragAndDropCollectionViews */ = {
 			isa = PBXGroup;
 			children = (
+				BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */,
 				BE3603B51AD7DE06005EE44C /* AppDelegate.swift */,
 				BE3603B71AD7DE06005EE44C /* ViewController.swift */,
 				BE3603B91AD7DE06005EE44C /* Main.storyboard */,
@@ -110,6 +113,14 @@
 				BE3603CA1AD7DE06005EE44C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */,
+			);
+			name = KDDragAndDropCollectionViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */,
 				BE3603B81AD7DE06005EE44C /* ViewController.swift in Sources */,
 				BE3603B61AD7DE06005EE44C /* AppDelegate.swift in Sources */,
 			);
