@@ -92,6 +92,28 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath : NSIndexPath) -> Void {
         data[collectionView.tag].removeAtIndex(indexPath.item)
     }
+    
+    func collectionView(collectionView: UICollectionView, moveDataItemFromIndex fromIndexPath: NSIndexPath, toIndex toIndexPath : NSIndexPath) -> Void {
+        
+        let fromDataItem: AnyObject = data[collectionView.tag][fromIndexPath.item]
+        data[collectionView.tag].removeAtIndex(fromIndexPath.item)
+        data[collectionView.tag].insert(fromDataItem, atIndex: toIndexPath.item)
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, containsDataItem dataItem: AnyObject) -> Bool {
+        
+        if let colorCandidate = dataItem as? UIColor {
+            for item in data[collectionView.tag] as [UIColor] {
+                if colorCandidate  == item {
+                    return true
+                }
+            }
+        }
+        
+        return false
+        
+    }
 
 }
 

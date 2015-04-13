@@ -10,16 +10,26 @@ import UIKit
 
 @objc protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
+    func collectionView(collectionView: UICollectionView, containsDataItem dataItem: AnyObject) -> Bool
     func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject
+    
+    func collectionView(collectionView: UICollectionView, moveDataItemFromIndex fromIndexPath: NSIndexPath, toIndex toIndexPath : NSIndexPath) -> Void
     func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void
     func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: NSIndexPath) -> Void
     
 }
 
 class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     
     var draggingPathOfCellBeingDragged : NSIndexPath?
+    
+    var iDataSource : UICollectionViewDataSource?
+    var iDelegate : UICollectionViewDelegate?
 
     // MARK : KDDraggable
     func canDragAtPoint(point : CGPoint) -> Bool {
@@ -84,17 +94,86 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     func canDropAtRect(rect : CGRect) -> Bool {
         return true
     }
-    func willMoveItemInRect(item : AnyObject, rect : CGRect) -> Void {
+    
+    func indexPathForCellOverlappingRect( rect : CGRect) -> NSIndexPath? {
+        
+        var overlappingArea : CGFloat = 0.0
+        
+        var cellCandidate : UICollectionViewCell?
+        
+        for visible in self.visibleCells() as [UICollectionViewCell] {
+            
+            let intersection = CGRectIntersection(visible.frame, rect)
+            
+            if (intersection.width * intersection.height) > overlappingArea {
+                
+                overlappingArea = intersection.width * intersection.width
+                
+                cellCandidate = visible
+            }
+            
+        }
+        
+        if let cellRetrieved = cellCandidate {
+            
+            return self.indexPathForCell(cellRetrieved)
+        }
+        
+        return nil
+    }
+    
+    func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
+        
+        if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+            
+            if dragDropDS.collectionView(self, containsDataItem: item) {
+                return
+            }
+            
+            if let indexPath = self.indexPathForCellOverlappingRect(rect) {
+               
+                dragDropDS.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
+                
+            }
+            
+        }
         
     }
-    func didMoveItemInRect (item : AnyObject, rect : CGRect) -> Void {
+    func didMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
+        
+        if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+            
+            if dragDropDS.collectionView(self, containsDataItem: item) {
+              
+                if let indexPath = self.indexPathForCellOverlappingRect(rect) {
+                    
+                    if let draggingIndexPath = self.draggingPathOfCellBeingDragged {
+                        
+                        if indexPath.item != draggingIndexPath.item {
+                            
+                            dragDropDS.collectionView(self, moveDataItemFromIndex: draggingIndexPath, toIndex: indexPath)
+                            
+                            self.moveItemAtIndexPath(draggingIndexPath, toIndexPath: indexPath)
+                            
+                            self.draggingPathOfCellBeingDragged = indexPath
+                            
+                        }
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
     }
-    func didMoveItemOut(item : AnyObject) -> Void {
+    func didMoveOutItem(item : AnyObject) -> Void {
         
     }
-    func dropDataItemAtRect(item : AnyObject, rect : CGRect) -> Void {
+    func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
         
     }
+    
+    
     
 }

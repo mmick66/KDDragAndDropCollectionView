@@ -18,10 +18,10 @@ import UIKit
 
 @objc protocol KDDroppable {
     func canDropAtRect(rect : CGRect) -> Bool
-    func willMoveItemInRect(item : AnyObject, rect : CGRect) -> Void
-    func didMoveItemInRect (item : AnyObject, rect : CGRect) -> Void
-    func didMoveItemOut(item : AnyObject) -> Void
-    func dropDataItemAtRect(item : AnyObject, rect : CGRect) -> Void
+    func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void
+    func didMoveItem(item : AnyObject, inRect rect : CGRect) -> Void
+    func didMoveOutItem(item : AnyObject) -> Void
+    func dropDataItem(item : AnyObject, atRect : CGRect) -> Void
 }
 
 class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
@@ -137,7 +137,6 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                     var intersectionNew = CGRectIntersection(bundl.representationImageView.frame, viewFrameOnCanvas).size
                     
                     
-                    
                     if (intersectionNew.width * intersectionNew.height) > overlappingArea {
                         
                         overlappingArea = intersectionNew.width * intersectionNew.width
@@ -148,27 +147,25 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                     
                 }
                 
-                println("\(mainOverView?.tag)")
-                
                 
                 if let droppable = mainOverView? as? KDDroppable {
                     
+                    let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: mainOverView)
+                    
                     if bundl.sourceDraggableView != mainOverView {
                         
-                        droppable.willMoveItemInRect(bundl.dataItem, rect: bundl.representationImageView.frame)
+                        droppable.willMoveItem(bundl.dataItem, inRect: rect)
+                        
                         
                     }
                     
                     self.bundle!.overDroppableView = mainOverView
                     
-                    droppable.didMoveItemInRect(bundl.dataItem, rect: bundl.representationImageView.frame)
+                    droppable.didMoveItem(bundl.dataItem, inRect: rect)
                     
                 }
                 
                
-                
-                
-                
             case .Ended :
                 bundl.representationImageView.removeFromSuperview()
                 sourceDraggable.stopDragging?()
