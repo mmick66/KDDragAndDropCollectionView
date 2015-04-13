@@ -56,18 +56,13 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         
-        for view in self.views {
+        for view in self.views.filter({ v -> Bool in v is KDDraggable})  {
             
-            if let draggable = view as? KDDraggable {
-                
+                let draggable = view as KDDraggable
                 
                 let touchPointInView = touch.locationInView(view)
                 
-                if draggable.canDragAtPoint(touchPointInView) == false {
-                    return false
-                }
-                
-                if CGRectContainsPoint(view.frame, touchPointInView) {
+                if draggable.canDragAtPoint(touchPointInView) == true {
                     
                     if let representation = draggable.representationImageAtPoint(touchPointInView) {
                         
@@ -90,22 +85,22 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                             )
                             
                             return true
-                            
-                        } // if let dataItem : AnyObject = ...
-                        
-                        
-                    } // if let representation = ...
                     
-                    
-                } // if CGRectContainsPoint ...
+                        } // if let dataIte...
+                        
                 
-            }
+                    } // if let representation = dragg...
+                   
+           
+            } // if draggable.canDragAtP...
             
-        }
+        } // for view in self.views.fil...
         
         return false
         
     }
+    
+    
     
     
     func updateForLongPress(recogniser : UILongPressGestureRecognizer) -> Void {
@@ -134,25 +129,27 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 
                 var mainOverView : UIView?
                 
-                for view in self.views {
+                for view in self.views.filter({ v -> Bool in v is KDDroppable}) {
                  
-                    if let droppable = view as? KDDroppable {
+                    let viewFrameOnCanvas = self.convertRectToCanvas(view.frame, fromView: view)
+                    
+                    // Figure out which collection view is most of the image over
+                    var intersectionNew = CGRectIntersection(bundl.representationImageView.frame, viewFrameOnCanvas).size
+                    
+                    
+                    
+                    if (intersectionNew.width * intersectionNew.height) > overlappingArea {
                         
-                        let collectionViewFrameOnCanvas = self.canvas.convertRect(view.frame, fromView: view)
+                        overlappingArea = intersectionNew.width * intersectionNew.width
                         
-                        // Figure out which collection view is most of the image over
-                        var intersectionNew = CGRectIntersection(bundl.representationImageView.frame, collectionViewFrameOnCanvas).size
-                        
-                        if (intersectionNew.width * intersectionNew.height) > overlappingArea {
-                            
-                            overlappingArea = intersectionNew.width * intersectionNew.width
-                            
-                            mainOverView = view
-                        }
-                        
+                        mainOverView = view
                     }
+
                     
                 }
+                
+                println("\(mainOverView?.tag)")
+                
                 
                 if let droppable = mainOverView? as? KDDroppable {
                     
@@ -186,6 +183,30 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         
         
         
+    }
+    
+    // MARK: Helper Methods 
+    func convertRectToCanvas(rect : CGRect, fromView view : UIView) -> CGRect {
+        
+        var r : CGRect = rect
+        
+        var v = view
+        
+        while v != self.canvas {
+            
+            if let sv = v.superview {
+                
+                r.origin.x += sv.frame.origin.x
+                r.origin.y += sv.frame.origin.y
+                
+                v = sv
+                
+                continue
+            }
+            break
+        }
+        
+        return r
     }
    
 }
