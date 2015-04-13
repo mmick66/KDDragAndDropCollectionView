@@ -10,9 +10,13 @@ import UIKit
 
 class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
-    
+    @IBOutlet weak var firstCollectionView: UICollectionView!
+    @IBOutlet weak var secondCollectionView: UICollectionView!
+    @IBOutlet weak var thirdCollectionView: UICollectionView!
     
     var data : [[AnyObject]] = [[AnyObject]]()
+    
+    var dragAndDropManager : KDDragAndDropManager?
     
     override func viewDidLoad() {
         
@@ -39,6 +43,9 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
             data.append(array)
         }
         
+        
+        self.dragAndDropManager = KDDragAndDropManager(canvas: self.view, collectionViews: [firstCollectionView, secondCollectionView, thirdCollectionView])
+        
     }
 
     
@@ -50,12 +57,23 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as ColorCell
         
         if let color = data[collectionView.tag][indexPath.item] as? UIColor {
             
             cell.label.text = String(indexPath.item)
             cell.backgroundColor = color
+        }
+        
+        cell.hidden = false
+        
+        if let kdCollectionView = collectionView as? KDDragAndDropCollectionView {
+            if let draggingPathOfCellBeingDragged = kdCollectionView.draggingPathOfCellBeingDragged {
+                if draggingPathOfCellBeingDragged.item == indexPath.item {
+                    cell.hidden = true
+                }
+            }
         }
         
         return cell

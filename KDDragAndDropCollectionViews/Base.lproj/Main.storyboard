@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="02Q-nP-ygV">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="02Q-nP-ygV" customClass="KDDragAndDropCollectionView" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="60" width="414" height="127"/>
                                 <color key="backgroundColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -38,7 +38,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEu-N7-cWu">
                                                     <rect key="frame" x="8" y="8" width="53" height="111"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.91358770718232041" green="0.91358770718232041" blue="0.91358770718232041" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -62,53 +62,7 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="2P0-HE-cF8"/>
                                 </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-CP-X3q">
-                                <rect key="frame" x="0.0" y="208" width="414" height="127"/>
-                                <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="127" id="osl-2t-d6N"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Js1-G5-cJL">
-                                    <size key="itemSize" width="69" height="127"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="26h-Fb-UEi" customClass="ColorCell" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewl-rs-GAp">
-                                                    <rect key="frame" x="8" y="8" width="53" height="111"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" red="0.69561464088397784" green="0.34631838848027224" blue="0.15160241818182327" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="ewl-rs-GAp" firstAttribute="top" secondItem="26h-Fb-UEi" secondAttribute="top" constant="8" id="LTJ-ek-gS3"/>
-                                            <constraint firstItem="ewl-rs-GAp" firstAttribute="leading" secondItem="26h-Fb-UEi" secondAttribute="leading" constant="8" id="RQr-HQ-ckN"/>
-                                            <constraint firstAttribute="bottom" secondItem="ewl-rs-GAp" secondAttribute="bottom" constant="8" id="d7Z-dC-4FQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="ewl-rs-GAp" secondAttribute="trailing" constant="8" id="yaj-Kw-cPQ"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="label" destination="ewl-rs-GAp" id="Bkh-EY-GTF"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="6A0-u7-VfI"/>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="WRh-pe-vfl"/>
-                                </connections>
-                            </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W0b-dH-TwB">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W0b-dH-TwB" customClass="KDDragAndDropCollectionView" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="357" width="414" height="127"/>
                                 <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -130,7 +84,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0z-HE-FSj">
                                                     <rect key="frame" x="8" y="8" width="53" height="111"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -154,6 +108,52 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="spA-eY-aVR"/>
                                 </connections>
                             </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-CP-X3q" customClass="KDDragAndDropCollectionView" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="208" width="414" height="127"/>
+                                <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="127" id="osl-2t-d6N"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Js1-G5-cJL">
+                                    <size key="itemSize" width="69" height="127"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="26h-Fb-UEi" customClass="ColorCell" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewl-rs-GAp">
+                                                    <rect key="frame" x="8" y="8" width="53" height="111"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.69561464088397784" green="0.34631838848027224" blue="0.15160241818182327" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="ewl-rs-GAp" firstAttribute="top" secondItem="26h-Fb-UEi" secondAttribute="top" constant="8" id="LTJ-ek-gS3"/>
+                                            <constraint firstItem="ewl-rs-GAp" firstAttribute="leading" secondItem="26h-Fb-UEi" secondAttribute="leading" constant="8" id="RQr-HQ-ckN"/>
+                                            <constraint firstAttribute="bottom" secondItem="ewl-rs-GAp" secondAttribute="bottom" constant="8" id="d7Z-dC-4FQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="ewl-rs-GAp" secondAttribute="trailing" constant="8" id="yaj-Kw-cPQ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="label" destination="ewl-rs-GAp" id="Bkh-EY-GTF"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="6A0-u7-VfI"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="WRh-pe-vfl"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -169,6 +169,11 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="firstCollectionView" destination="02Q-nP-ygV" id="DdS-b1-5ng"/>
+                        <outlet property="secondCollectionView" destination="Ulr-CP-X3q" id="HfD-8g-M0r"/>
+                        <outlet property="thirdCollectionView" destination="W0b-dH-TwB" id="LK8-Lm-Ybd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

@@ -17,6 +17,9 @@ import UIKit
 }
 
 class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
+    
+    
+    var draggingPathOfCellBeingDragged : NSIndexPath?
 
     // MARK : KDDraggable
     func canDragAtPoint(point : CGPoint) -> Bool {
@@ -44,14 +47,35 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     func dataItemAtPoint(point : CGPoint) -> AnyObject? {
         
         var dataItem : AnyObject?
+        
         if let indexPath = self.indexPathForItemAtPoint(point) {
             
             if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+                
                 dataItem = dragDropDS.collectionView(self, dataItemForIndexPath: indexPath)
+                
             }
             
         }
         return dataItem
+    }
+    
+    
+    
+    func startDraggingAtPoint(point : CGPoint) -> Void {
+        
+        self.draggingPathOfCellBeingDragged = self.indexPathForItemAtPoint(point)
+        
+        self.reloadData()
+        
+    }
+    
+    func stopDragging() -> Void {
+        
+        self.draggingPathOfCellBeingDragged = nil
+        
+        self.reloadData()
+        
     }
     
     
