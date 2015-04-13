@@ -15,6 +15,7 @@
 		BE3603CC1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */; };
 		BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */; };
 		BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */; };
+		BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603DA1ADBE397005EE44C /* ColorCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewsTests.swift; sourceTree = "<group>"; };
 		BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropManager.swift; sourceTree = "<group>"; };
 		BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
+		BE3603DA1ADBE397005EE44C /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */,
 				BE3603B51AD7DE06005EE44C /* AppDelegate.swift */,
 				BE3603B71AD7DE06005EE44C /* ViewController.swift */,
+				BE3603DA1ADBE397005EE44C /* ColorCell.swift */,
 				BE3603B91AD7DE06005EE44C /* Main.storyboard */,
 				BE3603BC1AD7DE06005EE44C /* Images.xcassets */,
 				BE3603BE1AD7DE06005EE44C /* LaunchScreen.xib */,
@@ -229,6 +232,7 @@
 				BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */,
 				BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */,
 				BE3603B81AD7DE06005EE44C /* ViewController.swift in Sources */,
+				BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */,
 				BE3603B61AD7DE06005EE44C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -421,6 +425,7 @@
 				BE3603D11AD7DE06005EE44C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE3603D21AD7DE06005EE44C /* Build configuration list for PBXNativeTarget "KDDragAndDropCollectionViewsTests" */ = {
 			isa = XCConfigurationList;
@@ -429,6 +434,7 @@
 				BE3603D41AD7DE06005EE44C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

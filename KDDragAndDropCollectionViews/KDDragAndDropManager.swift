@@ -148,9 +148,9 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                         
                         currentDroppable.willMoveItemInRect(bundl.dataItem, rect: bundl.representationImageView.frame)
                         
-                        self.bundle!.overCollectionView = dominantCollectionView
-                        
                     }
+                    
+                    self.bundle!.overCollectionView = dominantCollectionView
                     
                     currentDroppable.didMoveItemInRect(bundl.dataItem, rect: bundl.representationImageView.frame)
                     
