@@ -134,6 +134,8 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                
                 dragDropDS.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
                 
+                self.insertItemsAtIndexPaths([indexPath])
+                
             }
             
         }

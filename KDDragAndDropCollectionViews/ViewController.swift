@@ -8,13 +8,27 @@
 
 import UIKit
 
+class DataItem : Equatable {
+    
+    var indexes : String = ""
+    var colour : UIColor = UIColor.clearColor()
+    init(indexes : String, colour : UIColor) {
+        self.indexes = indexes
+        self.colour = colour
+    }
+}
+
+func ==(lhs: DataItem, rhs: DataItem) -> Bool {
+    return lhs.indexes == rhs.indexes && lhs.colour == rhs.colour
+}
+
 class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
     @IBOutlet weak var firstCollectionView: UICollectionView!
     @IBOutlet weak var secondCollectionView: UICollectionView!
     @IBOutlet weak var thirdCollectionView: UICollectionView!
     
-    var data : [[AnyObject]] = [[AnyObject]]()
+    var data : [[DataItem]] = [[DataItem]]()
     
     var dragAndDropManager : KDDragAndDropManager?
     
@@ -22,25 +36,26 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         
         super.viewDidLoad()
         
-        let colorOne = UIColor(red: 53.0/255.0, green: 102.0/255.0, blue: 149.0/255.0, alpha: 1.0)
-        let colorTwo = UIColor(red: 177.0/255.0, green: 88.0/255.0, blue: 39.0/255.0, alpha: 1.0)
-        let colorFour = UIColor(red: 138.0/255.0, green: 149.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-        
-        let colors : [UIColor] = [colorOne, colorTwo, colorFour]
+        let colours : [UIColor] = [
+            UIColor(red: 53.0/255.0, green: 102.0/255.0, blue: 149.0/255.0, alpha: 1.0),
+            UIColor(red: 177.0/255.0, green: 88.0/255.0, blue: 39.0/255.0, alpha: 1.0),
+            UIColor(red: 138.0/255.0, green: 149.0/255.0, blue: 86.0/255.0, alpha: 1.0)
+        ]
         
         for i in 0...2 {
             
-            var array = [AnyObject]()
+            var items = [DataItem]()
             
             for j in 0...20 {
                 
-                let color = colors[i]
                 
-                array.append(color)
+                let dataItem = DataItem(indexes: String(i) + ":" + String(j), colour: colours[i])
+                
+                items.append(dataItem)
                 
             }
             
-            data.append(array)
+            data.append(items)
         }
         
         
@@ -60,11 +75,10 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as ColorCell
         
-        if let color = data[collectionView.tag][indexPath.item] as? UIColor {
+        let dataItem = data[collectionView.tag][indexPath.item]
             
-            cell.label.text = String(indexPath.item)
-            cell.backgroundColor = color
-        }
+        cell.label.text = String(indexPath.item) + "\n\n" + dataItem.indexes
+        cell.backgroundColor = dataItem.colour
         
         cell.hidden = false
         
@@ -86,7 +100,10 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     }
     func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void {
         
-        data[collectionView.tag].insert(dataItem, atIndex: indexPath.item)
+        if let di = dataItem as? DataItem {
+            data[collectionView.tag].insert(di, atIndex: indexPath.item)
+        }
+        
         
     }
     func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath : NSIndexPath) -> Void {
@@ -95,7 +112,7 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, moveDataItemFromIndex fromIndexPath: NSIndexPath, toIndex toIndexPath : NSIndexPath) -> Void {
         
-        let fromDataItem: AnyObject = data[collectionView.tag][fromIndexPath.item]
+        let fromDataItem: DataItem = data[collectionView.tag][fromIndexPath.item]
         data[collectionView.tag].removeAtIndex(fromIndexPath.item)
         data[collectionView.tag].insert(fromDataItem, atIndex: toIndexPath.item)
         
@@ -103,9 +120,9 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, containsDataItem dataItem: AnyObject) -> Bool {
         
-        if let colorCandidate = dataItem as? UIColor {
-            for item in data[collectionView.tag] as [UIColor] {
-                if colorCandidate  == item {
+        if let candidate = dataItem as? DataItem {
+            for item in data[collectionView.tag] {
+                if candidate  == item {
                     return true
                 }
             }
