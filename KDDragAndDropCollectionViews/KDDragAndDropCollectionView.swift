@@ -10,10 +10,10 @@ import UIKit
 
 @objc protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, containsDataItem dataItem: AnyObject) -> Bool
+    func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath?
     func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject
     
-    func collectionView(collectionView: UICollectionView, moveDataItemFromIndex fromIndexPath: NSIndexPath, toIndex toIndexPath : NSIndexPath) -> Void
+    func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath from: NSIndexPath, toIndexPath to : NSIndexPath) -> Void
     func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void
     func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: NSIndexPath) -> Void
     
@@ -88,6 +88,17 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
     }
     
+    func dragDataItem(item : AnyObject) -> Void {
+        
+        if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+            
+            if let existngIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
+                dragDropDS.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
+            }
+            
+        }
+        
+    }
     
     // MARK : KDDroppable
 
@@ -124,9 +135,9 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+        if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
             
-            if dragDropDS.collectionView(self, containsDataItem: item) {
+            if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
                 return
             }
             
@@ -143,23 +154,20 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     }
     func didMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+        if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
             
-            if dragDropDS.collectionView(self, containsDataItem: item) {
+            if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
               
                 if let indexPath = self.indexPathForCellOverlappingRect(rect) {
                     
-                    if let draggingIndexPath = self.draggingPathOfCellBeingDragged {
+                    if indexPath.item != existingIndexPath.item {
                         
-                        if indexPath.item != draggingIndexPath.item {
-                            
-                            dragDropDS.collectionView(self, moveDataItemFromIndex: draggingIndexPath, toIndex: indexPath)
-                            
-                            self.moveItemAtIndexPath(draggingIndexPath, toIndexPath: indexPath)
-                            
-                            self.draggingPathOfCellBeingDragged = indexPath
-                            
-                        }
+                        dragDropDS.collectionView(self, moveDataItemFromIndexPath: existingIndexPath, toIndexPath: indexPath)
+                        
+                        self.moveItemAtIndexPath(existingIndexPath, toIndexPath: indexPath)
+                        
+                        self.draggingPathOfCellBeingDragged = indexPath
+                        
                     }
                     
                 }
@@ -173,6 +181,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
     }
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
+        
         
     }
     

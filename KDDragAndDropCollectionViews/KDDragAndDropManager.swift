@@ -12,6 +12,7 @@ import UIKit
     func canDragAtPoint(point : CGPoint) -> Bool
     func representationImageAtPoint(point : CGPoint) -> UIView?
     func dataItemAtPoint(point : CGPoint) -> AnyObject?
+    func dragDataItem(item : AnyObject) -> Void
     optional func startDraggingAtPoint(point : CGPoint) -> Void
     optional func stopDragging() -> Void
 }
@@ -167,6 +168,16 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 
                
             case .Ended :
+                
+                if let droppable = bundl.overDroppableView as? KDDroppable {
+                    
+                    (bundl.sourceDraggableView as KDDraggable).dragDataItem(bundl.dataItem)
+                    
+                    let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: bundl.overDroppableView)
+                    
+                    droppable.dropDataItem(bundl.dataItem, atRect: rect)
+                    
+                }
                 bundl.representationImageView.removeFromSuperview()
                 sourceDraggable.stopDragging?()
                 

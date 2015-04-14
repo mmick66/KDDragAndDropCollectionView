@@ -110,25 +110,29 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         data[collectionView.tag].removeAtIndex(indexPath.item)
     }
     
-    func collectionView(collectionView: UICollectionView, moveDataItemFromIndex fromIndexPath: NSIndexPath, toIndex toIndexPath : NSIndexPath) -> Void {
+    func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath from: NSIndexPath, toIndexPath to : NSIndexPath) -> Void {
         
-        let fromDataItem: DataItem = data[collectionView.tag][fromIndexPath.item]
-        data[collectionView.tag].removeAtIndex(fromIndexPath.item)
-        data[collectionView.tag].insert(fromDataItem, atIndex: toIndexPath.item)
+        let fromDataItem: DataItem = data[collectionView.tag][from.item]
+        data[collectionView.tag].removeAtIndex(from.item)
+        data[collectionView.tag].insert(fromDataItem, atIndex: to.item)
         
     }
     
-    func collectionView(collectionView: UICollectionView, containsDataItem dataItem: AnyObject) -> Bool {
+    func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath? {
         
-        if let candidate = dataItem as? DataItem {
-            for item in data[collectionView.tag] {
+        if let candidate : DataItem = dataItem as? DataItem {
+            
+            for item : DataItem in data[collectionView.tag] {
                 if candidate  == item {
-                    return true
+                    
+                    let position = find(data[collectionView.tag], item)! // ! if we are inside the condition we are guaranteed a position
+                    let indexPath = NSIndexPath(forItem: position, inSection: collectionView.tag)
+                    return indexPath
                 }
             }
         }
         
-        return false
+        return nil
         
     }
 
