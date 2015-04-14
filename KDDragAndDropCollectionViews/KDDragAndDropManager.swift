@@ -169,15 +169,20 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                
             case .Ended :
                 
-                if let droppable = bundl.overDroppableView as? KDDroppable {
+                if bundl.sourceDraggableView != bundl.overDroppableView {
                     
-                    (bundl.sourceDraggableView as KDDraggable).dragDataItem(bundl.dataItem)
-                    
-                    let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: bundl.overDroppableView)
-                    
-                    droppable.dropDataItem(bundl.dataItem, atRect: rect)
-                    
+                    if let droppable = bundl.overDroppableView as? KDDroppable {
+                        
+                        sourceDraggable.dragDataItem(bundl.dataItem)
+                        
+                        let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: bundl.overDroppableView)
+                        
+                        droppable.dropDataItem(bundl.dataItem, atRect: rect)
+                        
+                    }
                 }
+                
+                
                 bundl.representationImageView.removeFromSuperview()
                 sourceDraggable.stopDragging?()
                 

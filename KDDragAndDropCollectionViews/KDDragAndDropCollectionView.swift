@@ -25,6 +25,8 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         super.init(coder: aDecoder)
     }
     
+    var animatingTransition : Bool = false
+    
     
     var draggingPathOfCellBeingDragged : NSIndexPath?
     
@@ -84,7 +86,10 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         self.draggingPathOfCellBeingDragged = nil
         
-        self.reloadData()
+        if self.animatingTransition == false {
+           self.reloadData()
+        }
+        
         
     }
     
@@ -93,7 +98,18 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
             
             if let existngIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
+                
                 dragDropDS.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
+                
+                self.animatingTransition = true
+                
+                self.performBatchUpdates({ () -> Void in
+                    self.deleteItemsAtIndexPaths([existngIndexPath])
+                }, completion: { finished -> Void in
+                    self.animatingTransition = false
+                    self.reloadData()
+                })
+                
             }
             
         }
@@ -145,7 +161,24 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                
                 dragDropDS.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
                 
-                self.insertItemsAtIndexPaths([indexPath])
+                self.animatingTransition = true
+            
+                self.draggingPathOfCellBeingDragged = indexPath
+                
+                self.performBatchUpdates({ () -> Void in
+                    
+               
+                    self.insertItemsAtIndexPaths([indexPath])
+                    
+
+                    }, completion: { finished -> Void in
+                        
+                        self.animatingTransition = false
+                        self.reloadData()
+                
+                })
+                
+                
                 
             }
             
@@ -182,6 +215,11 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     }
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
         
+        self.draggingPathOfCellBeingDragged = nil
+        
+        if self.animatingTransition == false {
+            self.reloadData()
+        }
         
     }
     
