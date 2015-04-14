@@ -126,7 +126,7 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
                 if candidate  == item {
                     
                     let position = find(data[collectionView.tag], item)! // ! if we are inside the condition we are guaranteed a position
-                    let indexPath = NSIndexPath(forItem: position, inSection: collectionView.tag)
+                    let indexPath = NSIndexPath(forItem: position, inSection: 0)
                     return indexPath
                 }
             }
