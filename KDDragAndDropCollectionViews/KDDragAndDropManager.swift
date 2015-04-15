@@ -59,7 +59,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         
         for view in self.views.filter({ v -> Bool in v is KDDraggable})  {
             
-                let draggable = view as KDDraggable
+                let draggable = view as! KDDraggable
                 
                 let touchPointInView = touch.locationInView(view)
                 
@@ -109,7 +109,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         if let bundl = self.bundle {
             
             let pointOnCanvas = recogniser.locationInView(recogniser.view)
-            let sourceDraggable : KDDraggable = bundl.sourceDraggableView as KDDraggable
+            let sourceDraggable : KDDraggable = bundl.sourceDraggableView as! KDDraggable
             let pointOnSourceDraggable = recogniser.locationInView(bundl.sourceDraggableView)
             
             switch recogniser.state {
@@ -149,7 +149,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 }
                 
                 
-                if let droppable = mainOverView? as? KDDroppable {
+                if let droppable = mainOverView as? KDDroppable {
                     
                     let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: mainOverView)
                     

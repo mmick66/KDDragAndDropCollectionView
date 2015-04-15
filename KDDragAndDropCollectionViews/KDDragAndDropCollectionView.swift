@@ -62,7 +62,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         if let indexPath = self.indexPathForItemAtPoint(point) {
             
-            if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+            if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource {
                 
                 dataItem = dragDropDS.collectionView(self, dataItemForIndexPath: indexPath)
                 
@@ -95,7 +95,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func dragDataItem(item : AnyObject) -> Void {
         
-        if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+        if let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource {
             
             if let existngIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
                 
@@ -128,7 +128,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         var cellCandidate : UICollectionViewCell?
         
-        for visible in self.visibleCells() as [UICollectionViewCell] {
+        for visible in self.visibleCells() as! [UICollectionViewCell] {
             
             let intersection = CGRectIntersection(visible.frame, rect)
             
@@ -151,7 +151,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+        if let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource {
             
             if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
                 return
@@ -187,7 +187,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     }
     func didMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        if let dragDropDS = self.dataSource? as? KDDragAndDropCollectionViewDataSource {
+        if let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource {
             
             if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
               
