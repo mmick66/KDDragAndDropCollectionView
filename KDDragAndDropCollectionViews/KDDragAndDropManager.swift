@@ -17,6 +17,7 @@ import UIKit
     optional func stopDragging() -> Void
 }
 
+
 @objc protocol KDDroppable {
     func canDropAtRect(rect : CGRect) -> Bool
     func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void

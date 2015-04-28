@@ -25,19 +25,46 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         super.init(coder: aDecoder)
     }
     
-    var animatingTransition : Bool = false
-    
-    
     var draggingPathOfCellBeingDragged : NSIndexPath?
     
     var iDataSource : UICollectionViewDataSource?
     var iDelegate : UICollectionViewDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setup()
+    }
+    
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+        self.setup()
+    }
+    
+    private let PagingAreaWidth : CGFloat = 30.0
+    enum FrameEdge {
+        case Top
+        case Bottom
+        case Left
+        case Right
+    }
+    private var pagingAreas : [FrameEdge:CGRect] = [FrameEdge:CGRect]()
+    func setup() -> Void {
+        if let flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
+            if flowLayout.scrollDirection == .Horizontal {
+                pagingAreas[.Left] = CGRect(x: -(PagingAreaWidth), y: 0.0, width: PagingAreaWidth, height: self.frame.size.height)
+                pagingAreas[.Right] = CGRect(x: self.frame.size.width, y: 0.0, width: PagingAreaWidth, height: self.frame.size.height)
+            }
+            else {
+                pagingAreas[.Top] = CGRect(x: 0.0, y: -(PagingAreaWidth), width: self.frame.size.width, height: PagingAreaWidth)
+                pagingAreas[.Bottom] = CGRect(x: 0.0, y: self.frame.size.height, width: self.frame.size.width, height: PagingAreaWidth)
+            }
+        }
+    }
 
     // MARK : KDDraggable
     func canDragAtPoint(point : CGPoint) -> Bool {
         
-        // only checking whether the index path exists (we are not touching in between cells)
-        return (self.indexPathForItemAtPoint(point) != nil)
+        return self.dataSource != nil && self.dataSource is KDDragAndDropCollectionViewDataSource && self.indexPathForItemAtPoint(point) != nil
     }
     
     func representationImageAtPoint(point : CGPoint) -> UIView? {
@@ -84,12 +111,15 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func stopDragging() -> Void {
         
-        self.draggingPathOfCellBeingDragged = nil
-        
-        if self.animatingTransition == false {
-           self.reloadData()
+        if let idx = self.draggingPathOfCellBeingDragged {
+            if let cell = self.cellForItemAtIndexPath(idx) {
+                cell.hidden = false
+            }
         }
         
+        self.draggingPathOfCellBeingDragged = nil
+        
+        self.reloadData()
         
     }
     
@@ -101,14 +131,8 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                 
                 dragDropDS.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
                 
-                self.animatingTransition = true
                 
-                self.performBatchUpdates({ () -> Void in
-                    self.deleteItemsAtIndexPaths([existngIndexPath])
-                }, completion: { finished -> Void in
-                    self.animatingTransition = false
-                    self.reloadData()
-                })
+                self.deleteItemsAtIndexPaths([existngIndexPath])
                 
             }
             
@@ -149,77 +173,144 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         return nil
     }
     
+    
+    private var currentInRect : CGRect?
     func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        if let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource {
+        let dragDropDS = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a ds
+        
+        if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
+            return
+        }
+        
+        if let indexPath = self.indexPathForCellOverlappingRect(rect) {
             
-            if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
-                return
-            }
+            dragDropDS.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
             
-            if let indexPath = self.indexPathForCellOverlappingRect(rect) {
-               
-                dragDropDS.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
-                
-                self.animatingTransition = true
+            self.draggingPathOfCellBeingDragged = indexPath
             
-                self.draggingPathOfCellBeingDragged = indexPath
-                
-                self.performBatchUpdates({ () -> Void in
-                    
-               
-                    self.insertItemsAtIndexPaths([indexPath])
-                    
-
-                    }, completion: { finished -> Void in
-                        
-                        self.animatingTransition = false
-                        self.reloadData()
-                
-                })
-                
-                
-                
-            }
+            self.insertItemsAtIndexPaths([indexPath])
             
         }
         
-    }
-    func didMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
+        currentInRect = rect
         
-        if let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource {
+    }
+    
+    var paging : Bool = false
+    func checkForEdgesAndScroll(rect : CGRect) -> Void {
+        
+        if paging == true {
+            return
+        }
+        
+        for (edge, edgeRect) in pagingAreas {
             
-            if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
-              
-                if let indexPath = self.indexPathForCellOverlappingRect(rect) {
+            if CGRectIntersectsRect(edgeRect, rect) {
+                
+                var nextBounds = self.bounds
+                
+                switch(edge) {
                     
-                    if indexPath.item != existingIndexPath.item {
-                        
-                        dragDropDS.collectionView(self, moveDataItemFromIndexPath: existingIndexPath, toIndexPath: indexPath)
-                        
-                        self.moveItemAtIndexPath(existingIndexPath, toIndexPath: indexPath)
-                        
-                        self.draggingPathOfCellBeingDragged = indexPath
-                        
+                case .Top:
+                    nextBounds.origin.y += nextBounds.size.width
+                    if nextBounds.origin.y < 0.0 {
+                        nextBounds.origin.y = 0.0
                     }
                     
+                case .Bottom:
+                    nextBounds.origin.y -= nextBounds.size.width
+                    let maxY = self.contentSize.height - self.frame.size.height
+                    if nextBounds.origin.y > maxY {
+                        nextBounds.origin.y = maxY
+                    }
+                    
+                case .Left:
+                    nextBounds.origin.x -= nextBounds.size.width
+                    if nextBounds.origin.x < 0.0 {
+                        nextBounds.origin.x = 0.0
+                    }
+                    
+                case .Right:
+                    nextBounds.origin.x += nextBounds.size.width
+                    let maxX = self.contentSize.width - self.frame.size.width
+                    if nextBounds.origin.x > maxX {
+                        nextBounds.origin.x = maxX
+                    }
                 }
+                
+                
+                if CGRectEqualToRect(nextBounds, self.bounds) == false {
+                    
+                    paging = true
+                    
+                    println("nextBounds: \(edge) \(nextBounds)")
+                    
+                    
+                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+                    dispatch_after(delayTime, dispatch_get_main_queue(), {
+                        
+                        println("false")
+                        self.paging = false
+                        if let cir = self.currentInRect {
+                            self.checkForEdgesAndScroll(cir)
+                        }
+                        
+                    });
+                    
+                    
+                    self.scrollRectToVisible(nextBounds, animated: true)
+                    
+                    
+                    
+                }  // if CGRectEqualToRect(nextBou
+                
+                return
                 
             }
             
         }
         
     }
-    func didMoveOutItem(item : AnyObject) -> Void {
+    
+    func didMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
+        let dragDropDS = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a ds
+        
+        if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item),
+               indexPath = self.indexPathForCellOverlappingRect(rect) {
+   
+                if indexPath.item != existingIndexPath.item {
+                    
+                    dragDropDS.collectionView(self, moveDataItemFromIndexPath: existingIndexPath, toIndexPath: indexPath)
+                    
+                    self.moveItemAtIndexPath(existingIndexPath, toIndexPath: indexPath)
+                    
+                    self.draggingPathOfCellBeingDragged = indexPath
+                    
+                }
+        }
+        
+        // Check Paging
+        
+        currentInRect = rect
+        
+        // self.checkForEdgesAndScroll(rect)
+    }
+    
+    func didMoveOutItem(item : AnyObject) -> Void {
+        currentInRect = nil
     }
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
         
+        
+        
+        
         self.draggingPathOfCellBeingDragged = nil
         
-        if self.animatingTransition == false {
-            self.reloadData()
-        }
+        currentInRect = nil
+        
+        self.reloadData()
         
     }
     

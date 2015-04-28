@@ -83,9 +83,13 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         cell.hidden = false
         
         if let kdCollectionView = collectionView as? KDDragAndDropCollectionView {
+            
             if let draggingPathOfCellBeingDragged = kdCollectionView.draggingPathOfCellBeingDragged {
+                
                 if draggingPathOfCellBeingDragged.item == indexPath.item {
+                    println("\(draggingPathOfCellBeingDragged)")
                     cell.hidden = true
+                    
                 }
             }
         }
