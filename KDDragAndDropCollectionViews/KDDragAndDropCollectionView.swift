@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 @objc protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath?
@@ -32,34 +34,14 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setup()
+     
     }
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        self.setup()
+    
     }
     
-    private let PagingAreaWidth : CGFloat = 30.0
-    enum FrameEdge {
-        case Top
-        case Bottom
-        case Left
-        case Right
-    }
-    private var pagingAreas : [FrameEdge:CGRect] = [FrameEdge:CGRect]()
-    func setup() -> Void {
-        if let flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout {
-            if flowLayout.scrollDirection == .Horizontal {
-                pagingAreas[.Left] = CGRect(x: -(PagingAreaWidth), y: 0.0, width: PagingAreaWidth, height: self.frame.size.height)
-                pagingAreas[.Right] = CGRect(x: self.frame.size.width, y: 0.0, width: PagingAreaWidth, height: self.frame.size.height)
-            }
-            else {
-                pagingAreas[.Top] = CGRect(x: 0.0, y: -(PagingAreaWidth), width: self.frame.size.width, height: PagingAreaWidth)
-                pagingAreas[.Bottom] = CGRect(x: 0.0, y: self.frame.size.height, width: self.frame.size.width, height: PagingAreaWidth)
-            }
-        }
-    }
 
     // MARK : KDDraggable
     func canDragAtPoint(point : CGPoint) -> Bool {
@@ -204,69 +186,49 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
             return
         }
         
-        for (edge, edgeRect) in pagingAreas {
+        var currentRect : CGRect = CGRect(x: self.contentOffset.x, y: self.contentOffset.y, width: self.bounds.size.width, height: self.bounds.size.height)
+        var rectForNextScroll : CGRect = currentRect
+        
+        if (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .Horizontal {
             
-            if CGRectIntersectsRect(edgeRect, rect) {
-                
-                var nextBounds = self.bounds
-                
-                switch(edge) {
-                    
-                case .Top:
-                    nextBounds.origin.y += nextBounds.size.width
-                    if nextBounds.origin.y < 0.0 {
-                        nextBounds.origin.y = 0.0
-                    }
-                    
-                case .Bottom:
-                    nextBounds.origin.y -= nextBounds.size.width
-                    let maxY = self.contentSize.height - self.frame.size.height
-                    if nextBounds.origin.y > maxY {
-                        nextBounds.origin.y = maxY
-                    }
-                    
-                case .Left:
-                    nextBounds.origin.x -= nextBounds.size.width
-                    if nextBounds.origin.x < 0.0 {
-                        nextBounds.origin.x = 0.0
-                    }
-                    
-                case .Right:
-                    nextBounds.origin.x += nextBounds.size.width
-                    let maxX = self.contentSize.width - self.frame.size.width
-                    if nextBounds.origin.x > maxX {
-                        nextBounds.origin.x = maxX
-                    }
+            let leftBoundary = CGRect(x: -30.0, y: 0.0, width: 30.0, height: self.frame.size.height)
+            let rightBoundary = CGRect(x: self.frame.size.width, y: 0.0, width: 30.0, height: self.frame.size.height)
+            
+            if CGRectIntersectsRect(rect, leftBoundary) == true {
+                rectForNextScroll.origin.x -= self.bounds.size.width
+                if rectForNextScroll.origin.x < 0 {
+                    rectForNextScroll.origin.x = 0
                 }
+            }
+            else if CGRectIntersectsRect(rect, rightBoundary) == true {
+                rectForNextScroll.origin.x += self.bounds.size.width
+                if rectForNextScroll.origin.x > self.contentSize.width - self.bounds.size.width {
+                    rectForNextScroll.origin.x = self.contentSize.width - self.bounds.size.width
+                }
+            }
+            
+        }
+        else if (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .Vertical {
+            
+            let topBoundary = CGRect(x: 0.0, y: -30.0, width: self.frame.size.width, height: 30.0)
+            let bottomBoundary = CGRect(x: 0.0, y: self.frame.size.height, width: self.frame.size.width, height: 30.0)
+            
+            if CGRectIntersectsRect(rect, topBoundary) == true {
                 
+            }
+            else if CGRectIntersectsRect(rect, bottomBoundary) == true {
                 
-                if CGRectEqualToRect(nextBounds, self.bounds) == false {
-                    
-                    paging = true
-                    
-                    println("nextBounds: \(edge) \(nextBounds)")
-                    
-                    
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-                    dispatch_after(delayTime, dispatch_get_main_queue(), {
-                        
-                        println("false")
-                        self.paging = false
-                        if let cir = self.currentInRect {
-                            self.checkForEdgesAndScroll(cir)
-                        }
-                        
-                    });
-                    
-                    
-                    self.scrollRectToVisible(nextBounds, animated: true)
-                    
-                    
-                    
-                }  // if CGRectEqualToRect(nextBou
-                
-                return
-                
+            }
+        }
+        
+        // check to see if a change in rectForNextScroll has been made
+        if CGRectEqualToRect(currentRect, rectForNextScroll) == false {
+            self.paging = true
+            self.scrollRectToVisible(rectForNextScroll, animated: true)
+            
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.paging = false
             }
             
         }
@@ -293,18 +255,22 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         // Check Paging
         
-        currentInRect = rect
+        var normalizedRect = rect
+        normalizedRect.origin.x -= self.contentOffset.x
+        normalizedRect.origin.y -= self.contentOffset.y
         
-        // self.checkForEdgesAndScroll(rect)
+        currentInRect = normalizedRect
+        
+        
+        self.checkForEdgesAndScroll(normalizedRect)
+        
+        
     }
     
     func didMoveOutItem(item : AnyObject) -> Void {
         currentInRect = nil
     }
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
-        
-        
-        
         
         self.draggingPathOfCellBeingDragged = nil
         
