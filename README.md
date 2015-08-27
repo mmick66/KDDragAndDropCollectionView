@@ -11,6 +11,21 @@ Full tutorial [can be found here](http://karmadust.com/drag-and-drop-between-uic
 The data source of the collection views must implement 
 
 ```Swift
+protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
+    
+    func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath?
+    func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject
+    
+    func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath from: NSIndexPath, toIndexPath to : NSIndexPath) -> Void
+    func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void
+    func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: NSIndexPath) -> Void
+    
+}
+```
+
+In the example we have 3 UICollectionViews distinguishable by their tags (I know... bad practice ;-) and a data array holding 3 arrays respectively. In a case like this, an implementation of the above could be:
+
+```Swift
 func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject {
     return data[collectionView.tag][indexPath.item]
 }
