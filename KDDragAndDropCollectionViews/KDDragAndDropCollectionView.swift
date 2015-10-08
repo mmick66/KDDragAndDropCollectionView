@@ -23,7 +23,7 @@ import UIKit
 
 class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -134,7 +134,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         var cellCandidate : UICollectionViewCell?
         
-        for visible in self.visibleCells() as! [UICollectionViewCell] {
+        for visible in self.visibleCells() {
             
             let intersection = CGRectIntersection(visible.frame, rect)
             
@@ -161,7 +161,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         let dragDropDS = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a ds
         
-        if let existingIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
+        if let _ = dragDropDS.collectionView(self, indexPathForDataItem: item) {
             return
         }
         
@@ -186,7 +186,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
             return
         }
         
-        var currentRect : CGRect = CGRect(x: self.contentOffset.x, y: self.contentOffset.y, width: self.bounds.size.width, height: self.bounds.size.height)
+        let currentRect : CGRect = CGRect(x: self.contentOffset.x, y: self.contentOffset.y, width: self.bounds.size.width, height: self.bounds.size.height)
         var rectForNextScroll : CGRect = currentRect
         
         if (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .Horizontal {

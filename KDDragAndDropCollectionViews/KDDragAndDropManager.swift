@@ -136,7 +136,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                     let viewFrameOnCanvas = self.convertRectToCanvas(view.frame, fromView: view)
                     
                     // Figure out which collection view is most of the image over
-                    var intersectionNew = CGRectIntersection(bundl.representationImageView.frame, viewFrameOnCanvas).size
+                    let intersectionNew = CGRectIntersection(bundl.representationImageView.frame, viewFrameOnCanvas).size
                     
                     
                     if (intersectionNew.width * intersectionNew.height) > overlappingArea {
