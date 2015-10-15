@@ -277,6 +277,14 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                 
                 self.deleteItemsAtIndexPaths([existngIndexPath])
                 
+                if let idx = self.draggingPathOfCellBeingDragged {
+                    if let cell = self.cellForItemAtIndexPath(idx) {
+                        cell.hidden = false
+                    }
+                }
+                
+                self.draggingPathOfCellBeingDragged = nil
+                
             }
             
         }
