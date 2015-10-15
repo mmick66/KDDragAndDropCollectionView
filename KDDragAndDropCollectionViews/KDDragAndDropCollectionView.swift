@@ -107,11 +107,11 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func dragDataItem(item : AnyObject) -> Void {
         
-        if let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource {
+        if let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource {
             
-            if let existngIndexPath = dragDropDS.collectionView(self, indexPathForDataItem: item) {
+            if let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) {
                 
-                dragDropDS.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
+                dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
                 
                 
                 self.deleteItemsAtIndexPaths([existngIndexPath])
@@ -159,15 +159,15 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     private var currentInRect : CGRect?
     func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        let dragDropDS = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a ds
+        let dragDropDataSource = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a data source
         
-        if let _ = dragDropDS.collectionView(self, indexPathForDataItem: item) {
+        if let _ = dragDropDataSource.collectionView(self, indexPathForDataItem: item) {
             return
         }
         
         if let indexPath = self.indexPathForCellOverlappingRect(rect) {
             
-            dragDropDS.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
+            dragDropDataSource.collectionView(self, insertDataItem: item, atIndexPath: indexPath)
             
             self.draggingPathOfCellBeingDragged = indexPath
             
@@ -268,8 +268,23 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     }
     
     func didMoveOutItem(item : AnyObject) -> Void {
+        
+        if let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource {
+            
+            if let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) {
+                
+                dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
+                
+                self.deleteItemsAtIndexPaths([existngIndexPath])
+                
+            }
+            
+        }
+        
         currentInRect = nil
     }
+    
+    
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
         
         self.draggingPathOfCellBeingDragged = nil
