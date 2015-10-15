@@ -135,8 +135,17 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                  
                     let viewFrameOnCanvas = self.convertRectToCanvas(view.frame, fromView: view)
                     
-                    // Figure out which collection view is most of the image over
-                    var intersectionNew = CGRectIntersection(bundl.representationImageView.frame, viewFrameOnCanvas).size
+                    
+                    /*                ┌────────┐   ┌────────────┐
+                    *                 │       ┌┼───│Intersection│
+                    *                 │       ││   └────────────┘
+                    *                 │   ▼───┘│
+                    * ████████████████│████████│████████████████
+                    * ████████████████└────────┘████████████████
+                    * ██████████████████████████████████████████
+                    */
+                    
+                    let intersectionNew = CGRectIntersection(bundl.representationImageView.frame, viewFrameOnCanvas).size
                     
                     
                     if (intersectionNew.width * intersectionNew.height) > overlappingArea {
@@ -150,17 +159,19 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 }
                 
                 
+                
                 if let droppable = mainOverView as? KDDroppable {
                     
                     let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: mainOverView)
                     
-                    if bundl.sourceDraggableView != mainOverView {
+                    if mainOverView != bundl.overDroppableView  {
                         
+                        (bundl.overDroppableView as! KDDroppable).didMoveOutItem(bundl.dataItem)
                         droppable.willMoveItem(bundl.dataItem, inRect: rect)
-                        
                         
                     }
                     
+                    // set the view the dragged element is over
                     self.bundle!.overDroppableView = mainOverView
                     
                     droppable.didMoveItem(bundl.dataItem, inRect: rect)
