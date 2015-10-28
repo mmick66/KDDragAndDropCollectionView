@@ -131,10 +131,16 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     func indexPathForCellOverlappingRect( rect : CGRect) -> NSIndexPath? {
         
         var overlappingArea : CGFloat = 0.0
-        
         var cellCandidate : UICollectionViewCell?
         
-        for visible in self.visibleCells() {
+
+        let visibleCells = self.visibleCells()
+        if visibleCells.count == 0
+        {
+            return NSIndexPath(forRow: 0, inSection: 0)
+        }
+        
+        for visible in visibleCells {
             
             let intersection = CGRectIntersection(visible.frame, rect)
             
