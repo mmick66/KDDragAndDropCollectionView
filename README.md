@@ -23,7 +23,7 @@ protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
 }
 ```
 
-In the example we have 3 UICollectionViews distinguishable by their tags (I know... bad practice ;-) and a data array holding 3 arrays respectively. In a case like this, an implementation of the above could be:
+In the example we have 3 UICollectionViews distinguishable by their tags (bad practice, I know... but it's only an example ;-) and a data array holding 3 arrays respectively. In a case like this, an implementation of the above could be:
 
 ```Swift
 func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject {
