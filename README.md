@@ -2,6 +2,8 @@
 
 This is an implementation of a dragging and dropping action across UICollectionViews. 
 
+[Video Demo](https://d2p1e9awn3tn6.cloudfront.net/mJEJDs5J9X.mp4)
+
 ### Tutorial 
 
 Full tutorial [can be found here](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
