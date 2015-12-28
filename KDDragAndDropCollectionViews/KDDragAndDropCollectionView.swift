@@ -165,9 +165,9 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     private var currentInRect : CGRect?
     func willMoveItem(item : AnyObject, inRect rect : CGRect) -> Void {
         
-        let dragDropDataSource = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a data source
+        let dragDropDataSource = self.dataSource as! KDDragAndDropCollectionViewDataSource // its guaranteed to have a data source
         
-        if let _ = dragDropDataSource.collectionView(self, indexPathForDataItem: item) {
+        if let _ = dragDropDataSource.collectionView(self, indexPathForDataItem: item) { // if data item exists
             return
         }
         
@@ -177,7 +177,23 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
             
             self.draggingPathOfCellBeingDragged = indexPath
             
-            self.insertItemsAtIndexPaths([indexPath])
+            self.performBatchUpdates({ () -> Void in
+                
+                    self.insertItemsAtIndexPaths([indexPath])
+                
+                }, completion: { complete -> Void in
+                    
+                    if self.draggingPathOfCellBeingDragged == nil {
+                        
+                        
+                    }
+                    
+                    
+              
+                    
+                    
+            })
+            
             
         }
         
@@ -300,15 +316,33 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
+    
         
-        self.draggingPathOfCellBeingDragged = nil
+        self.revealCellAtIndexPath(self.draggingPathOfCellBeingDragged)
         
         currentInRect = nil
         
-        self.reloadData()
+        self.draggingPathOfCellBeingDragged = nil
         
     }
     
     
+    func revealCellAtIndexPath(indexPath : NSIndexPath?) {
+        
+        guard let ip = indexPath else {
+            return
+        }
+        
+        if let cell = self.cellForItemAtIndexPath(ip) where cell.hidden == true {
+            
+            cell.alpha = 0.0
+            cell.hidden = false
+            
+            UIView.animateWithDuration(0.5, animations: {
+                cell.alpha = 1.0
+            })
+            
+        }
+    }
     
 }

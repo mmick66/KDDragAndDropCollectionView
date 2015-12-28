@@ -131,7 +131,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 
                 var mainOverView : UIView?
                 
-                for view in self.views.filter({ v -> Bool in v is KDDroppable}) {
+                for view in self.views.filter({ v -> Bool in v is KDDroppable }) {
                  
                     let viewFrameOnCanvas = self.convertRectToCanvas(view.frame, fromView: view)
                     
@@ -181,7 +181,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                
             case .Ended :
                 
-                if bundl.sourceDraggableView != bundl.overDroppableView {
+                if bundl.sourceDraggableView != bundl.overDroppableView { // if we are actually dropping over a new view.
                     
                     if let droppable = bundl.overDroppableView as? KDDroppable {
                         
