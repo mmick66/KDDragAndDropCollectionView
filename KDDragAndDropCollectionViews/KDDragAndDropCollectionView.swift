@@ -188,16 +188,13 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                 
                 }, completion: { complete -> Void in
                     
+                    // if in the meantime we have let go
                     if self.draggingPathOfCellBeingDragged == nil {
-                        
-                        
+                        self.revealCellAtIndexPath(indexPath)
                     }
                     
                     
-              
-                    
-                    
-            })
+                })
             
             
         }
@@ -322,12 +319,11 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
     
-        
-        self.revealCellAtIndexPath(self.draggingPathOfCellBeingDragged)
-        
         currentInRect = nil
         
         self.draggingPathOfCellBeingDragged = nil
+        
+        self.reloadData()
         
     }
     
@@ -343,8 +339,13 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
             cell.alpha = 0.0
             cell.hidden = false
             
-            UIView.animateWithDuration(0.5, animations: {
-                cell.alpha = 1.0
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    cell.alpha = 1.0
+                
+                }, completion: { success -> Void in
+                    
+                    self.reloadData()
+                    
             })
             
         }
