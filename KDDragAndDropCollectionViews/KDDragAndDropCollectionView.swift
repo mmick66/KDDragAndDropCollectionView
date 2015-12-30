@@ -199,10 +199,8 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     
                     // if in the meantime we have let go
                     if self.draggingPathOfCellBeingDragged == nil {
-                        self.revealCellAtIndexPath(indexPath)
-                        
                       
-                        //self.reloadData()
+                        self.reloadData()
                     }
                     
                     
@@ -345,6 +343,16 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     
     func dropDataItem(item : AnyObject, atRect : CGRect) -> Void {
+        
+        if  let index = draggingPathOfCellBeingDragged,
+            let cell = self.cellForItemAtIndexPath(index) where cell.hidden == true {
+            
+            cell.alpha = 1.0
+            cell.hidden = false
+            
+            
+            
+        }
     
         currentInRect = nil
         
@@ -354,32 +362,5 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
     }
     
-    
-    func revealCellAtIndexPath(indexPath : NSIndexPath?) {
-        
-        guard let ip = indexPath else {
-            return
-        }
-        
-        if let cell = self.cellForItemAtIndexPath(ip) where cell.hidden == true {
-            
-            let cframe = cell.frame
-            //cell.frame = CGRect(x: cframe.origin.x, y: cframe.origin.y, width: 0.0, height: cframe.size.height)
-            cell.alpha = 0.0
-            cell.hidden = false
-            
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                
-                    cell.frame = cframe
-                    cell.alpha = 1.0
-                
-                }, completion: { success -> Void in
-                    
-                    self.reloadData()
-                    
-            })
-            
-        }
-    }
     
 }
