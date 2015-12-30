@@ -191,6 +191,9 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     // if in the meantime we have let go
                     if self.draggingPathOfCellBeingDragged == nil {
                         self.revealCellAtIndexPath(indexPath)
+                        
+                        print("Reload...")
+                        //self.reloadData()
                     }
                     
                     
@@ -270,7 +273,16 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     
                     dragDropDS.collectionView(self, moveDataItemFromIndexPath: existingIndexPath, toIndexPath: indexPath)
                     
-                    self.moveItemAtIndexPath(existingIndexPath, toIndexPath: indexPath)
+                    self.performBatchUpdates({ () -> Void in
+                        
+                            self.moveItemAtIndexPath(existingIndexPath, toIndexPath: indexPath)
+                        
+                        }, completion: { (finished) -> Void in
+                            
+                            self.reloadData()
+                            
+                    })
+                    
                     
                     self.draggingPathOfCellBeingDragged = indexPath
                     
