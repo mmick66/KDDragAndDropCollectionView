@@ -2,6 +2,8 @@
 
 This is an implementation of a dragging and dropping action across UICollectionViews. 
 
+![Drag and Drop Illustration](http://s27.postimg.org/geseg5j03/image.png "Drag and Drop")
+
 [Video Demo](https://d2p1e9awn3tn6.cloudfront.net/mJEJDs5J9X.mp4)
 
 ### Tutorial 
