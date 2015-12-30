@@ -118,8 +118,17 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                 
                 dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
                 
+                self.performBatchUpdates({ () -> Void in
+                    
+                    self.deleteItemsAtIndexPaths([existngIndexPath])
+                    
+                    }, completion: { complete -> Void in
+                        
+                        self.reloadData()
+                        
+                        
+                })
                 
-                self.deleteItemsAtIndexPaths([existngIndexPath])
                 
             }
             
@@ -192,7 +201,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     if self.draggingPathOfCellBeingDragged == nil {
                         self.revealCellAtIndexPath(indexPath)
                         
-                        print("Reload...")
+                      
                         //self.reloadData()
                     }
                     
@@ -281,8 +290,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                             
                             self.reloadData()
                             
-                    })
-                    
+                        })
                     
                     self.draggingPathOfCellBeingDragged = indexPath
                     
@@ -305,25 +313,32 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func didMoveOutItem(item : AnyObject) -> Void {
         
-        if let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource {
+        guard   let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource,
+                let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) else {
             
-            if let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) {
-                
-                dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
-                
-                self.deleteItemsAtIndexPaths([existngIndexPath])
-                
-                if let idx = self.draggingPathOfCellBeingDragged {
-                    if let cell = self.cellForItemAtIndexPath(idx) {
-                        cell.hidden = false
-                    }
-                }
-                
-                self.draggingPathOfCellBeingDragged = nil
-                
-            }
-            
+            return
         }
+        
+        dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
+        
+        self.performBatchUpdates({ () -> Void in
+            
+            self.deleteItemsAtIndexPaths([existngIndexPath])
+            
+            }, completion: { (finished) -> Void in
+                
+                self.reloadData()
+                
+        })
+        
+        
+        if let idx = self.draggingPathOfCellBeingDragged {
+            if let cell = self.cellForItemAtIndexPath(idx) {
+                cell.hidden = false
+            }
+        }
+        
+        self.draggingPathOfCellBeingDragged = nil
         
         currentInRect = nil
     }
@@ -348,10 +363,14 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         if let cell = self.cellForItemAtIndexPath(ip) where cell.hidden == true {
             
+            let cframe = cell.frame
+            //cell.frame = CGRect(x: cframe.origin.x, y: cframe.origin.y, width: 0.0, height: cframe.size.height)
             cell.alpha = 0.0
             cell.hidden = false
             
             UIView.animateWithDuration(0.2, animations: { () -> Void in
+                
+                    cell.frame = cframe
                     cell.alpha = 1.0
                 
                 }, completion: { success -> Void in
