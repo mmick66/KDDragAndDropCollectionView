@@ -8,11 +8,11 @@ This is an implementation of a dragging and dropping action across UICollectionV
 
 ### Tutorial 
 
-If you want to dig deeper into the logic that was followed, a Full tutorial can be found here](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
+If you want to dig deeper into the logic that was followed, a full tutorial can be found here](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
 
 ### Quick Guide
 
-The only responsibility of the user code is to manage the data that the collection view is representing. More specifically the data source of the collection views must implement 
+The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
 
 ```Swift
 protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
