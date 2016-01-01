@@ -164,17 +164,22 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                     
                     let rect = self.canvas.convertRect(bundl.representationImageView.frame, toView: mainOverView)
                     
-                    if mainOverView != bundl.overDroppableView  {
+                    if droppable.canDropAtRect(rect) {
                         
-                        (bundl.overDroppableView as! KDDroppable).didMoveOutItem(bundl.dataItem)
-                        droppable.willMoveItem(bundl.dataItem, inRect: rect)
+                        if mainOverView != bundl.overDroppableView { // if it is the first time we are entering
+                            
+                            (bundl.overDroppableView as! KDDroppable).didMoveOutItem(bundl.dataItem)
+                            droppable.willMoveItem(bundl.dataItem, inRect: rect)
+                            
+                        }
+                        
+                        // set the view the dragged element is over
+                        self.bundle!.overDroppableView = mainOverView
+                        
+                        droppable.didMoveItem(bundl.dataItem, inRect: rect)
                         
                     }
                     
-                    // set the view the dragged element is over
-                    self.bundle!.overDroppableView = mainOverView
-                    
-                    droppable.didMoveItem(bundl.dataItem, inRect: rect)
                     
                 }
                 
@@ -182,6 +187,8 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
             case .Ended :
                 
                 if bundl.sourceDraggableView != bundl.overDroppableView { // if we are actually dropping over a new view.
+                    
+                    print("\(bundl.overDroppableView?.tag)")
                     
                     if let droppable = bundl.overDroppableView as? KDDroppable {
                         
