@@ -122,11 +122,15 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                 
                 dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
                 
+                self.animating = true
+                
                 self.performBatchUpdates({ () -> Void in
                     
                     self.deleteItemsAtIndexPaths([existngIndexPath])
                     
                     }, completion: { complete -> Void in
+                        
+                        self.animating = false
                         
                         self.reloadData()
                         
@@ -154,10 +158,16 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
 
         let visibleCells = self.visibleCells()
-        if visibleCells.count == 0
-        {
+        if visibleCells.count == 0 {
             return NSIndexPath(forRow: 0, inSection: 0)
         }
+        
+        if  isHorizontal && rect.origin.x > self.contentSize.width ||
+            !isHorizontal && rect.origin.y > self.contentSize.height {
+                
+            return NSIndexPath(forRow: visibleCells.count - 1, inSection: 0)
+        }
+        
         
         for visible in visibleCells {
             
@@ -196,11 +206,15 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
             
             self.draggingPathOfCellBeingDragged = indexPath
             
+            self.animating = true
+            
             self.performBatchUpdates({ () -> Void in
                 
                     self.insertItemsAtIndexPaths([indexPath])
                 
                 }, completion: { complete -> Void in
+                    
+                    self.animating = false
                     
                     // if in the meantime we have let go
                     if self.draggingPathOfCellBeingDragged == nil {
@@ -218,6 +232,12 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
     }
     
+    var isHorizontal : Bool {
+        return (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .Horizontal
+    }
+    
+    var animating: Bool = false
+    
     var paging : Bool = false
     func checkForEdgesAndScroll(rect : CGRect) -> Void {
         
@@ -228,7 +248,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         let currentRect : CGRect = CGRect(x: self.contentOffset.x, y: self.contentOffset.y, width: self.bounds.size.width, height: self.bounds.size.height)
         var rectForNextScroll : CGRect = currentRect
         
-        if (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .Horizontal {
+        if isHorizontal {
             
             let leftBoundary = CGRect(x: -30.0, y: 0.0, width: 30.0, height: self.frame.size.height)
             let rightBoundary = CGRect(x: self.frame.size.width, y: 0.0, width: 30.0, height: self.frame.size.height)
@@ -246,8 +266,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                 }
             }
             
-        }
-        else if (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .Vertical {
+        } else { // is vertical
             
             let topBoundary = CGRect(x: 0.0, y: -30.0, width: self.frame.size.width, height: 30.0)
             let bottomBoundary = CGRect(x: 0.0, y: self.frame.size.height, width: self.frame.size.width, height: 30.0)
@@ -285,11 +304,15 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     
                     dragDropDS.collectionView(self, moveDataItemFromIndexPath: existingIndexPath, toIndexPath: indexPath)
                     
+                    self.animating = true
+                    
                     self.performBatchUpdates({ () -> Void in
                         
                             self.moveItemAtIndexPath(existingIndexPath, toIndexPath: indexPath)
                         
                         }, completion: { (finished) -> Void in
+                            
+                            self.animating = false
                             
                             self.reloadData()
                             
@@ -324,11 +347,15 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
         
+        self.animating = true
+        
         self.performBatchUpdates({ () -> Void in
             
             self.deleteItemsAtIndexPaths([existngIndexPath])
             
             }, completion: { (finished) -> Void in
+                
+                self.animating = false;
                 
                 self.reloadData()
                 
