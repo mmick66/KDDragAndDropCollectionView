@@ -6,10 +6,6 @@ Written is Swift, this is an implementation of Dragging and Dropping data across
 
 Video Demo: [Here](https://d2p1e9awn3tn6.cloudfront.net/mJEJDs5J9X.mp4)
 
-### Tutorial 
-
-If you want to dig deeper into the logic that was followed, a full tutorial can be found here](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
-
 ### Quick Guide
 
 The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
@@ -65,3 +61,7 @@ func collectionView(collectionView: UICollectionView, indexPathForDataItem dataI
     return nil
 }
 ```
+
+### Make your Own 
+
+If you want to dig deeper into the logic that was followed, a full tutorial on how it was built can be found at the [karmadust blog](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
