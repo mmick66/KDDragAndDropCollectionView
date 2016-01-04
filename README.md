@@ -1,6 +1,6 @@
 ## Drag and Drop Views 
 
-Written is Swift, this is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
+Written is Swift 2.0, this is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
 
 ![Drag and Drop Illustration](http://s27.postimg.org/geseg5j03/image.png "Drag and Drop")
 
