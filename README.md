@@ -46,13 +46,13 @@ func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath 
     
 }
 func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath? {
-    
+        
     if let candidate : DataItem = dataItem as? DataItem {
         
         for item : DataItem in data[collectionView.tag] {
             if candidate  == item {
                 
-                let position = find(data[collectionView.tag], item)! // ! if we are inside the condition we are guaranteed a position
+                let position = data[collectionView.tag].indexOf(item)! // ! if we are inside the condition we are guaranteed a position
                 let indexPath = NSIndexPath(forItem: position, inSection: 0)
                 return indexPath
             }
