@@ -8,8 +8,8 @@ Video Demo: [Here](https://d2p1e9awn3tn6.cloudfront.net/mJEJDs5J9X.mp4)
 
 ### Quick Guide
 
-1. The only file that is really needed is *KDDragAndDropManager.swift* so add that to the project.
-2. With this alone you will need to implement what happens to a UIView (or subclass yourself) so also add *KDDragAndDropCollectionView.swift* that implements it on a UICollectionView. Remember that the project is open for adding drag and drop to all kinds of views but seperate implementations are needed. 
+1. The only file that is really needed is *KDDragAndDropManager.swift*, so please add that to the project.
+2. With this alone you will need to implement what happens to a UIView (or subclass) yourself, so also add *KDDragAndDropCollectionView.swift* that implements it on a UICollectionView. Remember that the project is open for adding drag and drop to all kinds of views but seperate implementations are needed. 
 3. The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
 
 ```Swift
