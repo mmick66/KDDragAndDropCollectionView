@@ -4,7 +4,7 @@ Written is Swift 2.0, this is an implementation of Dragging and Dropping data ac
 
 ![Drag and Drop Illustration](http://s27.postimg.org/geseg5j03/image.png "Drag and Drop")
 
-Video Demo: [Here](https://d2p1e9awn3tn6.cloudfront.net/mJEJDs5J9X.mp4)
+Video Demo: [Here](https://d2p1e9awn3tn6.cloudfront.net/gtOPO743Up.mp4)
 
 ### Quick Guide
 
