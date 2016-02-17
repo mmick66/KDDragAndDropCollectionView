@@ -333,16 +333,16 @@ extension KDDragAndDropCollectionView: KDDroppable {
     currentInRect = nil
   }
 
-  func dropDataItem(item: AnyObject, atRect: CGRect) -> Void {
+  func dropDataItem(item: AnyObject, atRect: CGRect) {
     // show hidden cell
     if let index = draggingPathOfCellBeingDragged, cell = cellForItemAtIndexPath(index)
       where cell.hidden {
         cell.alpha = 1.0
         cell.hidden = false
     }
-    
+
     currentInRect = nil
-    
+
     draggingPathOfCellBeingDragged = nil
     reloadData()
   }

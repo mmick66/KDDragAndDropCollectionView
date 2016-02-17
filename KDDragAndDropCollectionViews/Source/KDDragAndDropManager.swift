@@ -13,18 +13,18 @@ import UIKit
   func canDragAtPoint(point: CGPoint) -> Bool
   func representationImageAtPoint(point: CGPoint) -> UIView?
   func dataItemAtPoint(point: CGPoint) -> AnyObject?
-  func dragDataItem(item: AnyObject) -> Void
-  optional func startDraggingAtPoint(point: CGPoint) -> Void
-  optional func stopDragging() -> Void
+  func dragDataItem(item: AnyObject)
+  optional func startDraggingAtPoint(point: CGPoint)
+  optional func stopDragging()
 }
 
 //MARK:- KDDroppable Protocol
 @objc protocol KDDroppable {
   func canDropAtRect(rect: CGRect) -> Bool
-  func willMoveItem(item: AnyObject, inRect rect: CGRect) -> Void
-  func didMoveItem(item: AnyObject, inRect rect: CGRect) -> Void
-  func didMoveOutItem(item: AnyObject) -> Void
-  func dropDataItem(item: AnyObject, atRect: CGRect) -> Void
+  func willMoveItem(item: AnyObject, inRect rect: CGRect)
+  func didMoveItem(item: AnyObject, inRect rect: CGRect)
+  func didMoveOutItem(item: AnyObject)
+  func dropDataItem(item: AnyObject, atRect: CGRect)
 }
 
 //MARK:- KDDragAndDropManagerBundle
