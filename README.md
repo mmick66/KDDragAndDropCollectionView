@@ -6,6 +6,8 @@ Written is Swift 2.0, this is an implementation of Dragging and Dropping data ac
 
 Appetize.io Demo: [Here](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3)
 
+[![Appetize.io Demo](http://s27.postimg.org/geseg5j03/image.png)](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3)
+
 ### Quick Guide
 
 1. The only file that is really needed is *KDDragAndDropManager.swift*, so please add that to the project.
