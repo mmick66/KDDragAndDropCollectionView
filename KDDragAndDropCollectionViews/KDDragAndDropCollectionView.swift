@@ -59,16 +59,16 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         if let indexPath = self.indexPathForItemAtPoint(point) {
             
-            let cell = self.cellForItemAtIndexPath(indexPath)!
-			
-			UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.opaque, 0)
-			cell.layer.renderInContext(UIGraphicsGetCurrentContext()!)
-			let img = UIGraphicsGetImageFromCurrentImageContext()
-			UIGraphicsEndImageContext()
-			
-			imageView = UIImageView(image: img)
-			
-            imageView?.frame = cell.frame
+			if let cell = self.cellForItemAtIndexPath(indexPath) {
+				UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.opaque, 0)
+				cell.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+				let img = UIGraphicsGetImageFromCurrentImageContext()
+				UIGraphicsEndImageContext()
+				
+				imageView = UIImageView(image: img)
+				
+				imageView?.frame = cell.frame
+			}
         }
         
         return imageView
