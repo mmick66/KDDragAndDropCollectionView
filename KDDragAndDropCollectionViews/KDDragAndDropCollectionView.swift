@@ -175,7 +175,7 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
             
             if (intersection.width * intersection.height) > overlappingArea {
                 
-                overlappingArea = intersection.width * intersection.width
+                overlappingArea = intersection.width * intersection.height
                 
                 cellCandidate = visible
             }
