@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,12 +18,12 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="02Q-nP-ygV" customClass="KDDragAndDropCollectionView" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="60" width="414" height="127"/>
-                                <color key="backgroundColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="127"/>
+                                <color key="backgroundColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="127" id="hTY-pv-arw"/>
                                 </constraints>
@@ -30,7 +35,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="0Gd-Ct-NcX" customClass="ColorCell" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
@@ -39,13 +44,12 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEu-N7-cWu">
                                                     <rect key="frame" x="8" y="8" width="53" height="111"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" red="0.91358770718232041" green="0.91358770718232041" blue="0.91358770718232041" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.91358770718232041" green="0.91358770718232041" blue="0.91358770718232041" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.20784313725490194" green="0.40000000000000002" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.20784313725490194" green="0.40000000000000002" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="vEu-N7-cWu" firstAttribute="leading" secondItem="0Gd-Ct-NcX" secondAttribute="leading" constant="8" id="5ZW-6l-ire"/>
                                             <constraint firstAttribute="trailing" secondItem="vEu-N7-cWu" secondAttribute="trailing" constant="8" id="9Rf-qC-CZk"/>
@@ -63,8 +67,8 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W0b-dH-TwB" customClass="KDDragAndDropCollectionView" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="357" width="414" height="127"/>
-                                <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="357" width="375" height="127"/>
+                                <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="127" id="b2a-nb-sW7"/>
                                 </constraints>
@@ -76,7 +80,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="52z-5z-nYi" customClass="ColorCell" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
@@ -85,13 +89,12 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0z-HE-FSj">
                                                     <rect key="frame" x="8" y="8" width="53" height="111"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.54246954185530316" green="0.58431372550000005" blue="0.33837884800628459" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.54246954185530316" green="0.58431372550000005" blue="0.33837884800628459" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="t0z-HE-FSj" secondAttribute="trailing" constant="8" id="05h-Gh-loO"/>
                                             <constraint firstItem="t0z-HE-FSj" firstAttribute="leading" secondItem="52z-5z-nYi" secondAttribute="leading" constant="8" id="R15-Eo-Ui9"/>
@@ -109,8 +112,8 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-CP-X3q" customClass="KDDragAndDropCollectionView" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="208" width="414" height="127"/>
-                                <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="208" width="375" height="127"/>
+                                <color key="backgroundColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="127" id="lIk-bs-4QU"/>
                                 </constraints>
@@ -122,7 +125,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="26h-Fb-UEi" customClass="ColorCell" customModule="KDDragAndDropCollectionViews" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="69" height="127"/>
@@ -131,13 +134,12 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewl-rs-GAp">
                                                     <rect key="frame" x="8" y="8" width="53" height="111"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                    <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.91358770720000004" green="0.91358770720000004" blue="0.91358770720000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.69561464088397784" green="0.34631838848027224" blue="0.15160241818182327" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.69561464088397784" green="0.34631838848027224" blue="0.15160241818182327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="ewl-rs-GAp" firstAttribute="top" secondItem="26h-Fb-UEi" secondAttribute="top" constant="8" id="LTJ-ek-gS3"/>
                                             <constraint firstItem="ewl-rs-GAp" firstAttribute="leading" secondItem="26h-Fb-UEi" secondAttribute="leading" constant="8" id="RQr-HQ-ckN"/>
@@ -155,7 +157,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="02Q-nP-ygV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="B8k-UW-dkQ"/>
                             <constraint firstAttribute="trailing" secondItem="02Q-nP-ygV" secondAttribute="trailing" id="Pwd-WN-ZkH"/>
@@ -168,7 +170,6 @@
                             <constraint firstItem="W0b-dH-TwB" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yk3-Tu-aHK"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="firstCollectionView" destination="02Q-nP-ygV" id="DdS-b1-5ng"/>
                         <outlet property="secondCollectionView" destination="Ulr-CP-X3q" id="HfD-8g-M0r"/>
@@ -177,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="548" y="454"/>
+            <point key="canvasLocation" x="548" y="453.82308845577217"/>
         </scene>
     </scenes>
 </document>
