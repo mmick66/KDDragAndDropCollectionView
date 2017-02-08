@@ -55,39 +55,36 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func representationImageAtPoint(_ point : CGPoint) -> UIView? {
         
-        var imageView : UIView?
-        
-        if let indexPath = self.indexPathForItem(at: point) {
-            
-			if let cell = self.cellForItem(at: indexPath) {
-				UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.isOpaque, 0)
-				cell.layer.render(in: UIGraphicsGetCurrentContext()!)
-				let img = UIGraphicsGetImageFromCurrentImageContext()
-				UIGraphicsEndImageContext()
-				
-				imageView = UIImageView(image: img)
-				
-				imageView?.frame = cell.frame
-			}
+        guard let indexPath = self.indexPathForItem(at: point) else {
+            return nil
         }
+        
+        guard let cell = self.cellForItem(at: indexPath) else {
+            return nil
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.isOpaque, 0)
+        cell.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let imageView = UIImageView(image: image)
+        imageView.frame = cell.frame
         
         return imageView
     }
     
     func dataItemAtPoint(_ point : CGPoint) -> AnyObject? {
         
-        var dataItem : AnyObject?
-        
-        if let indexPath = self.indexPathForItem(at: point) {
-            
-            if let dragDropDS : KDDragAndDropCollectionViewDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource {
-                
-                dataItem = dragDropDS.collectionView(self, dataItemForIndexPath: indexPath)
-                
-            }
-            
+        guard let indexPath = self.indexPathForItem(at: point) else {
+            return nil
         }
-        return dataItem
+        
+        guard let dragDropDS = self.dataSource as? KDDragAndDropCollectionViewDataSource else {
+            return nil
+        }
+        
+        return dragDropDS.collectionView(self, dataItemForIndexPath: indexPath)
     }
     
     
@@ -116,31 +113,30 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     func dragDataItem(_ item : AnyObject) -> Void {
         
-        if let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource {
-            
-            if let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) {
-                
-                dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
-                
-                self.animating = true
-                
-                self.performBatchUpdates({ () -> Void in
-                    
-                    self.deleteItems(at: [existngIndexPath])
-                    
-                    }, completion: { complete -> Void in
-                        
-                        self.animating = false
-                        
-                        self.reloadData()
-                        
-                        
-                })
-                
-                
-            }
+        guard let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource else {
+            return
+        }
+        
+        guard let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) else {
+            return
             
         }
+        
+        dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
+        
+        self.animating = true
+        
+        self.performBatchUpdates({ () -> Void in
+            
+            self.deleteItems(at: [existngIndexPath])
+            
+        }, completion: { complete -> Void in
+            
+            self.animating = false
+            
+            self.reloadData()
+            
+        })
         
     }
     
@@ -224,7 +220,6 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     
                     
                 })
-            
             
         }
         
