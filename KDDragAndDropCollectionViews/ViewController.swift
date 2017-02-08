@@ -11,7 +11,7 @@ import UIKit
 class DataItem : Equatable {
     
     var indexes : String = ""
-    var colour : UIColor = UIColor.clearColor()
+    var colour : UIColor = UIColor.clear
     init(indexes : String, colour : UIColor) {
         self.indexes = indexes
         self.colour = colour
@@ -66,21 +66,21 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     
     // MARK : UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data[collectionView.tag].count
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! ColorCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ColorCell
         
         let dataItem = data[collectionView.tag][indexPath.item]
             
         cell.label.text = String(indexPath.item) + "\n\n" + dataItem.indexes
         cell.backgroundColor = dataItem.colour
         
-        cell.hidden = false
+        cell.isHidden = false
         
         if let kdCollectionView = collectionView as? KDDragAndDropCollectionView {
             
@@ -88,7 +88,7 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
                 
                 if draggingPathOfCellBeingDragged.item == indexPath.item {
                     
-                    cell.hidden = true
+                    cell.isHidden = true
                     
                 }
             }
@@ -99,38 +99,38 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
     // MARK : KDDragAndDropCollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject {
+    func collectionView(_ collectionView: UICollectionView, dataItemForIndexPath indexPath: IndexPath) -> AnyObject {
         return data[collectionView.tag][indexPath.item]
     }
-    func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void {
+    func collectionView(_ collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: IndexPath) -> Void {
         
         if let di = dataItem as? DataItem {
-            data[collectionView.tag].insert(di, atIndex: indexPath.item)
+            data[collectionView.tag].insert(di, at: indexPath.item)
         }
         
         
     }
-    func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath : NSIndexPath) -> Void {
-        data[collectionView.tag].removeAtIndex(indexPath.item)
+    func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath : IndexPath) -> Void {
+        data[collectionView.tag].remove(at: indexPath.item)
     }
     
-    func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath from: NSIndexPath, toIndexPath to : NSIndexPath) -> Void {
+    func collectionView(_ collectionView: UICollectionView, moveDataItemFromIndexPath from: IndexPath, toIndexPath to : IndexPath) -> Void {
         
         let fromDataItem: DataItem = data[collectionView.tag][from.item]
-        data[collectionView.tag].removeAtIndex(from.item)
-        data[collectionView.tag].insert(fromDataItem, atIndex: to.item)
+        data[collectionView.tag].remove(at: from.item)
+        data[collectionView.tag].insert(fromDataItem, at: to.item)
         
     }
     
-    func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath? {
+    func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath? {
         
         if let candidate : DataItem = dataItem as? DataItem {
             
             for item : DataItem in data[collectionView.tag] {
                 if candidate  == item {
                     
-                    let position = data[collectionView.tag].indexOf(item)! // ! if we are inside the condition we are guaranteed a position
-                    let indexPath = NSIndexPath(forItem: position, inSection: 0)
+                    let position = data[collectionView.tag].index(of: item)! // ! if we are inside the condition we are guaranteed a position
+                    let indexPath = IndexPath(item: position, section: 0)
                     return indexPath
                 }
             }
