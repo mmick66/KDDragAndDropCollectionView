@@ -58,45 +58,43 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
-        for view in self.views.filter({ v -> Bool in v is KDDraggable})  {
+        for view in self.views where view is KDDraggable  {
             
-                let draggable = view as! KDDraggable
+            let draggable = view as! KDDraggable
                 
-                let touchPointInView = touch.location(in: view)
-                
-                if draggable.canDragAtPoint(touchPointInView) == true {
-                    
-                    if let representation = draggable.representationImageAtPoint(touchPointInView) {
-                        
-                        representation.frame = self.canvas.convert(representation.frame, from: view)
-                        
-                        representation.alpha = 0.7
-                        
-                        let pointOnCanvas = touch.location(in: self.canvas)
-                        
-                        let offset = CGPoint(x: pointOnCanvas.x - representation.frame.origin.x, y: pointOnCanvas.y - representation.frame.origin.y)
-                        
-                        if let dataItem : AnyObject = draggable.dataItemAtPoint(touchPointInView) {
-                            
-                            self.bundle = Bundle(
-                                offset: offset,
-                                sourceDraggableView: view,
-                                overDroppableView : view is KDDroppable ? view : nil,
-                                representationImageView: representation,
-                                dataItem : dataItem
-                            )
-                            
-                            return true
-                    
-                        } // if let dataIte...
-                        
-                
-                    } // if let representation = dragg...
-                   
-           
-            } // if draggable.canDragAtP...
+            let touchPointInView = touch.location(in: view)
             
-        } // for view in self.views.fil...
+            if draggable.canDragAtPoint(touchPointInView) == false {
+                continue
+            }
+            
+            guard let representation = draggable.representationImageAtPoint(touchPointInView) else {
+                continue
+            }
+            
+            representation.frame = self.canvas.convert(representation.frame, from: view)
+            
+            representation.alpha = 0.7
+            
+            let pointOnCanvas = touch.location(in: self.canvas)
+            
+            let offset = CGPoint(x: pointOnCanvas.x - representation.frame.origin.x, y: pointOnCanvas.y - representation.frame.origin.y)
+            
+            if let dataItem : AnyObject = draggable.dataItemAtPoint(touchPointInView) {
+                
+                self.bundle = Bundle(
+                    offset: offset,
+                    sourceDraggableView: view,
+                    overDroppableView : view is KDDroppable ? view : nil,
+                    representationImageView: representation,
+                    dataItem : dataItem
+                )
+                
+                return true
+                
+            }
+            
+        }
         
         return false
         
@@ -187,8 +185,6 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
             case .ended :
                 
                 if bundl.sourceDraggableView != bundl.overDroppableView { // if we are actually dropping over a new view.
-                    
-                    print("\(bundl.overDroppableView?.tag)")
                     
                     if let droppable = bundl.overDroppableView as? KDDroppable {
                         
