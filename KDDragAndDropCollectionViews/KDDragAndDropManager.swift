@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 @objc protocol KDDraggable {
     func canDragAtPoint(_ point : CGPoint) -> Bool
     func representationImageAtPoint(_ point : CGPoint) -> UIView?
@@ -129,7 +131,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 
                 var mainOverView : UIView?
                 
-                for view in self.views.filter({ v -> Bool in v is KDDroppable }) {
+                for view in self.views where view is KDDraggable  {
                  
                     let viewFrameOnCanvas = self.convertRectToCanvas(view.frame, fromView: view)
                     

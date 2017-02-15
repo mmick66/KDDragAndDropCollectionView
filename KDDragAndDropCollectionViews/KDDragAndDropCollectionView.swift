@@ -46,11 +46,11 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     // MARK : KDDraggable
     func canDragAtPoint(_ point : CGPoint) -> Bool {
         
-        guard let _ = self.dataSource as? KDDragAndDropCollectionViewDataSource else {
-            return false
+        if self.dataSource is KDDragAndDropCollectionViewDataSource {
+            return self.indexPathForItem(at: point) != nil
         }
+        return false
         
-        return self.indexPathForItem(at: point) != nil
     }
     
     func representationImageAtPoint(_ point : CGPoint) -> UIView? {
