@@ -6,18 +6,18 @@ Written is Swift 3.0, this is an implementation of Dragging and Dropping data ac
 
 Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3)
 
-### Requirements
+## Requirements
 
 * iOS 8.0+
 * Swift 3.0 +
 
-### Installation
+## Installation
 
 Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your project.
 
 *The only file that is really needed is KDDragAndDropManager.swift but this alone you will need to implement what happens to a UIView (or subclass) yourself*.
 
-### Quick Guide
+## Quick Guide
 
 The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
 
@@ -73,11 +73,11 @@ func collectionView(collectionView: UICollectionView, indexPathForDataItem dataI
 }
 ```
 
-### Make your Own 
+## Make your Own 
 
 If you want to dig deeper into the logic that was followed, a full tutorial on how it was built can be found at the [karmadust blog](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
 
-### License 
+## License 
 
 The MIT License (MIT)
 
