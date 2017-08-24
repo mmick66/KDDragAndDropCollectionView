@@ -73,15 +73,6 @@ func collectionView(collectionView: UICollectionView, indexPathForDataItem dataI
 }
 ```
 
-### TODO (Issues)
-
-There is at least one issue you could contribute to, which is visible [here](https://d2p1e9awn3tn6.cloudfront.net/SGlvMBmZRq.mp4) in slow animations. As one can see, when paging, the cells do not appear from the start but only when the animation is finished, creating an ugly effect that can be confusing the the user. All animations happen in
-
-```Swift
-// KDDragAndDropCollectionView.swift
-func checkForEdgesAndScroll(rect : CGRect) -> Void
-```
-
 ### Make your Own 
 
 If you want to dig deeper into the logic that was followed, a full tutorial on how it was built can be found at the [karmadust blog](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
