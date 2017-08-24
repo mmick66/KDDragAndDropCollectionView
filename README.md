@@ -6,11 +6,20 @@ Written is Swift 3.0, this is an implementation of Dragging and Dropping data ac
 
 Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3)
 
+### Requirements
+
+* iOS 8.0+
+* Swift 3.0 +
+
+### Installation
+
+Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your project.
+
+*The only file that is really needed is KDDragAndDropManager.swift but this alone you will need to implement what happens to a UIView (or subclass) yourself*.
+
 ### Quick Guide
 
-1. The only file that is really needed is *KDDragAndDropManager.swift*, so please add that to the project.
-2. With this alone you will need to implement what happens to a UIView (or subclass) yourself, so also add *KDDragAndDropCollectionView.swift* that implements it on a UICollectionView. Remember that the project is open for adding drag and drop to all kinds of views but seperate implementations are needed. 
-3. The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
+The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
 
 ```Swift
 protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
