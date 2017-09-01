@@ -75,7 +75,7 @@ func collectionView(collectionView: UICollectionView, indexPathForDataItem dataI
 
 ## Make your Own 
 
-If you want to dig deeper into the logic that was followed, a full tutorial on how it was built can be found at the [karmadust blog](http://karmadust.com/drag-and-drop-between-uicollectionviews/).
+If you want to dig deeper into the logic that was followed, a full tutorial on how it was built can be found at the [karmadust blog](http://blog.karmadust.com/drag-and-drop-between-uicollectionviews/).
 
 ## License 
 
