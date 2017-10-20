@@ -1,6 +1,6 @@
 ## Drag and Drop Views 
 
-Written is Swift 3.0, this is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
+Written for Swift 4.0, it is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
 
 ![Drag and Drop Illustration](http://s27.postimg.org/geseg5j03/image.png "Drag and Drop")
 
@@ -9,7 +9,8 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 ## Requirements
 
 * iOS 8.0+
-* Swift 3.0 +
+* XCode 9.0+
+* Swift 4.0 +
 
 ## Installation
 
