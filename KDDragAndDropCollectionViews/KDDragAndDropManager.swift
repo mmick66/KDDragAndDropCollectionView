@@ -105,7 +105,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     
     
     
-    func updateForLongPress(_ recogniser : UILongPressGestureRecognizer) -> Void {
+    @objc func updateForLongPress(_ recogniser : UILongPressGestureRecognizer) -> Void {
         
         if let bundl = self.bundle {
             
