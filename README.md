@@ -9,7 +9,8 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 ## Requirements
 
 * iOS 8.0+
-* Swift 3.0 +
+* XCode 9.0+
+* Swift 4.0 +
 
 ## Installation
 
