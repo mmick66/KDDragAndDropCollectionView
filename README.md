@@ -24,8 +24,6 @@ pod 'KDDragAndDropCollectionViews', '~> 1.0'
 
 Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your project.
 
-*The only file that is really needed is KDDragAndDropManager.swift but this alone you will need to implement what happens to a UIView (or subclass) yourself*.
-
 ## Quick Guide
 
 The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
