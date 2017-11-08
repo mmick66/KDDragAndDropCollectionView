@@ -1,4 +1,4 @@
-## Drag and Drop Views 
+## Drag and Drop Collection Views 
 
 Written for Swift 4.0, it is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
 
@@ -13,6 +13,14 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 * Swift 4.0 +
 
 ## Installation
+
+#### Cocoa Pods
+
+```
+pod 'KDDragAndDropCollectionViews', '~> 1.0'
+```
+
+#### Manual
 
 Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your project.
 
