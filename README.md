@@ -76,6 +76,26 @@ func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dat
 }
 ```
 
+## Data Items and Equatable
+
+In the example code I have created
+
+```
+class DataItem : Equatable {
+    var indexes: String
+    var colour: UIColor
+    init(indexes: String, colour: UIColor = UIColor.clear) {
+        self.indexes    = indexes
+        self.colour     = colour
+    }
+    static func ==(lhs: DataItem, rhs: DataItem) -> Bool {
+        return lhs.indexes == rhs.indexes && lhs.colour == rhs.colour
+    }
+}
+```
+
+In the course of development you will be making your own types that must comform to the `Equatable` protocol as above. Each data item must be uniquely idenfyiable so be careful when creating cells that can have duplicate display values as for example a Scrabble type game where the same letter appears more than once. In cases like these, a simple identifier will do to implement the equality.
+
 ## Make your Own 
 
 If you want to dig deeper into the logic that was followed, a full tutorial on how it was built can be found at the [karmadust blog](http://blog.karmadust.com/drag-and-drop-between-uicollectionviews/).
