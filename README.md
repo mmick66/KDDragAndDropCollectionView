@@ -63,19 +63,15 @@ func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath 
     data[collectionView.tag].insert(fromDataItem, atIndex: to.item)
     
 }
-func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath? {
-        
-    if let candidate : DataItem = dataItem as? DataItem {
-        
-        for item : DataItem in data[collectionView.tag] {
-            if candidate  == item {
-                
-                let position = data[collectionView.tag].indexOf(item)! // ! if we are inside the condition we are guaranteed a position
-                let indexPath = NSIndexPath(forItem: position, inSection: 0)
-                return indexPath
-            }
-        }
+func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath? {
+    
+    guard let candidate = dataItem as? DataItem else { return nil }
+    
+    for (i,item) in data[collectionView.tag].enumerated() {
+        if candidate != item { continue }
+        return IndexPath(item: i, section: 0)
     }
+    
     return nil
 }
 ```
