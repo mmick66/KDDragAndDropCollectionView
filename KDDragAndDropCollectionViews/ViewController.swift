@@ -141,16 +141,11 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath? {
         
-        if let candidate : DataItem = dataItem as? DataItem {
-            
-            for item : DataItem in data[collectionView.tag] {
-                if candidate  == item {
-                    
-                    let position = data[collectionView.tag].index(of: item)! // ! if we are inside the condition we are guaranteed a position
-                    let indexPath = IndexPath(item: position, section: 0)
-                    return indexPath
-                }
-            }
+        guard let candidate = dataItem as? DataItem else { return nil }
+        
+        for (i,item) in data[collectionView.tag].enumerated() {
+            if candidate != item { continue }
+            return IndexPath(item: i, section: 0)
         }
         
         return nil
@@ -158,4 +153,6 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
     }
 
 }
+
+
 
