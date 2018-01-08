@@ -27,16 +27,16 @@ import UIKit
 
 class DataItem : Equatable {
     
-    var indexes : String = ""
-    var colour : UIColor = UIColor.clear
-    init(indexes : String, colour : UIColor) {
-        self.indexes = indexes
-        self.colour = colour
+    var indexes: String
+    var colour: UIColor
+    init(indexes: String, colour: UIColor = UIColor.clear) {
+        self.indexes    = indexes
+        self.colour     = colour
     }
-}
-
-func ==(lhs: DataItem, rhs: DataItem) -> Bool {
-    return lhs.indexes == rhs.indexes && lhs.colour == rhs.colour
+    
+    static func ==(lhs: DataItem, rhs: DataItem) -> Bool {
+        return lhs.indexes == rhs.indexes && lhs.colour == rhs.colour
+    }
 }
 
 class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
