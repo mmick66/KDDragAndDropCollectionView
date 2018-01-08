@@ -47,31 +47,31 @@ In the example we have 3 UICollectionViews distinguishable by their tags (bad pr
 func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject {
     return data[collectionView.tag][indexPath.item]
 }
+
 func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void {
-    
     if let di = dataItem as? DataItem {
         data[collectionView.tag].insert(di, atIndex: indexPath.item)
     }
 }
+
 func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath : NSIndexPath) -> Void {
     data[collectionView.tag].removeAtIndex(indexPath.item)
 }
+
 func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath from: NSIndexPath, toIndexPath to : NSIndexPath) -> Void {
-    
     let fromDataItem: DataItem = data[collectionView.tag][from.item]
     data[collectionView.tag].removeAtIndex(from.item)
-    data[collectionView.tag].insert(fromDataItem, atIndex: to.item)
-    
+    data[collectionView.tag].insert(fromDataItem, atIndex: to.item)    
 }
+
 func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath? {
-    
+
     guard let candidate = dataItem as? DataItem else { return nil }
     
     for (i,item) in data[collectionView.tag].enumerated() {
         if candidate != item { continue }
         return IndexPath(item: i, section: 0)
     }
-    
     return nil
 }
 ```
