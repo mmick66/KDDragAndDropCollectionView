@@ -80,7 +80,7 @@ func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dat
 
 In the example code I have created
 
-```
+```Swift
 class DataItem : Equatable {
     var indexes: String
     var colour: UIColor
