@@ -78,7 +78,7 @@ func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dat
 
 ## Data Items and Equatable
 
-In the example code I have created
+In the example code included in this project, I have created a `DataItem` class to represent the data displayed by the collection view.
 
 ```Swift
 class DataItem : Equatable {
@@ -94,7 +94,7 @@ class DataItem : Equatable {
 }
 ```
 
-In the course of development you will be making your own types that must comform to the `Equatable` protocol as above. Each data item must be uniquely idenfyiable so be careful when creating cells that can have duplicate display values as for example a Scrabble type game where the same letter appears more than once. In cases like these, a simple identifier will do to implement the equality.
+In the course of development you will be making your own types that must comform to the `Equatable` protocol as above. Each data item must be **uniquely idenfyiable** so be careful when creating cells that can have duplicate display values as for example a ["Scrabble"](https://en.wikipedia.org/wiki/Scrabble) type game where the same letter appears more than once. In cases like these, a simple identifier will do to implement the equality.
 
 ## Make your Own 
 
