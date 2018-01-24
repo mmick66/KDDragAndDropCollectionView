@@ -154,7 +154,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 let viewFrameOnCanvas = self.convertRectToCanvas(view.frame, fromView: view)
                 
                 
-                /*                ┌────────┐   ┌────────────┐
+                /*                 ┌────────┐   ┌────────────┐
                  *                 │       ┌┼───│Intersection│
                  *                 │       ││   └────────────┘
                  *                 │   ▼───┘│
