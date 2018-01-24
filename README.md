@@ -52,6 +52,7 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
 The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
 
+```Swift
 protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath?
