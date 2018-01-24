@@ -139,19 +139,19 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
         
-        self.animating = true
-        
-        self.performBatchUpdates({ () -> Void in
-            
+        if self.animating {
             self.deleteItems(at: [existngIndexPath])
+        }
+        else {
             
-        }, completion: { complete -> Void in
-            
-            self.animating = false
-            
-            self.reloadData()
-            
-        })
+            self.animating = true
+            self.performBatchUpdates({ () -> Void in
+                self.deleteItems(at: [existngIndexPath])
+            }, completion: { complete -> Void in
+                self.animating = false
+                self.reloadData()
+            })
+        }
         
     }
     
@@ -317,13 +317,9 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
                     self.animating = true
                     
                     self.performBatchUpdates({ () -> Void in
-                        
                             self.moveItem(at: existingIndexPath, to: indexPath)
-                        
                         }, completion: { (finished) -> Void in
-                            
                             self.animating = false
-                            
                             self.reloadData()
                             
                         })
@@ -357,20 +353,19 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
         
         dragDropDataSource.collectionView(self, deleteDataItemAtIndexPath: existngIndexPath)
         
-        self.animating = true
-        
-        self.performBatchUpdates({ () -> Void in
-            
+        if self.animating {
             self.deleteItems(at: [existngIndexPath])
-            
+        }
+        else {
+            self.animating = true
+            self.performBatchUpdates({ () -> Void in
+                self.deleteItems(at: [existngIndexPath])
             }, completion: { (finished) -> Void in
-                
                 self.animating = false;
-                
                 self.reloadData()
-                
             })
-        
+            
+        }
         
         if let idx = self.draggingPathOfCellBeingDragged {
             if let cell = self.cellForItem(at: idx) {
