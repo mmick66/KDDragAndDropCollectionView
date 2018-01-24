@@ -41,9 +41,9 @@ class DataItem : Equatable {
 
 class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
-    @IBOutlet weak var firstCollectionView: UICollectionView!
-    @IBOutlet weak var secondCollectionView: UICollectionView!
-    @IBOutlet weak var thirdCollectionView: UICollectionView!
+    @IBOutlet weak var firstCollectionView: KDDragAndDropCollectionView!
+    @IBOutlet weak var secondCollectionView: KDDragAndDropCollectionView!
+    @IBOutlet weak var thirdCollectionView: KDDragAndDropCollectionView!
     
     var data : [[DataItem]] = [[DataItem]]()
     
