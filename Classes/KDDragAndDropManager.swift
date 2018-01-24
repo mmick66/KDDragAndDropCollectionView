@@ -188,7 +188,6 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                         
                         (bundle.overDroppableView as! KDDroppable).didMoveOutItem(bundle.dataItem)
                         droppable.willMoveItem(bundle.dataItem, inRect: rect)
-                        
                     }
                     
                     // set the view the dragged element is over
@@ -197,8 +196,6 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                     droppable.didMoveItem(bundle.dataItem, inRect: rect)
                     
                 }
-                
-                
             }
             
             
@@ -231,22 +228,17 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     // MARK: Helper Methods 
     func convertRectToCanvas(_ rect : CGRect, fromView view : UIView) -> CGRect {
         
-        var r : CGRect = rect
-        
+        var r = rect
         var v = view
         
         while v != self.canvas {
             
-            if let sv = v.superview {
-                
-                r.origin.x += sv.frame.origin.x
-                r.origin.y += sv.frame.origin.y
-                
-                v = sv
-                
-                continue
-            }
-            break
+            guard let sv = v.superview else { break; }
+            
+            r.origin.x += sv.frame.origin.x
+            r.origin.y += sv.frame.origin.y
+            
+            v = sv
         }
         
         return r
