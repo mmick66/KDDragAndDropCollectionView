@@ -26,9 +26,32 @@ Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your
 
 ## Quick Guide
 
-The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
+Make the UICollectionView of interest a `KDDragAndDropCollectionView`
+
+![XCode Interface Builder Screen](https://github.com/mmick66/KDDragAndDropCollectionView/blob/master/Resources/Screenshot.Installation.png?raw=true)
+
+Then set a class as dataSource implementing the `KDDragAndDropCollectionViewDataSource` protocol.
 
 ```Swift
+class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
+
+    @IBOutlet weak var firstCollectionView: KDDragAndDropCollectionView!
+    @IBOutlet weak var secondCollectionView: KDDragAndDropCollectionView!
+    @IBOutlet weak var thirdCollectionView: KDDragAndDropCollectionView!
+    
+    var data : [[DataItem]] = [[DataItem]]() // just for this example
+    
+    var dragAndDropManager : KDDragAndDropManager?
+    
+    override func viewDidLoad() {
+        let all = [firstCollectionView, secondCollectionView, thirdCollectionView]
+        self.dragAndDropManager = KDDragAndDropManager(canvas: self.view, collectionViews: all)
+    }
+}
+```
+
+The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
+
 protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath?
