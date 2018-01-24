@@ -27,17 +27,23 @@ import UIKit
 
 
 
-@objc protocol KDDraggable {
+protocol KDDraggable {
     func canDragAtPoint(_ point : CGPoint) -> Bool
     func representationImageAtPoint(_ point : CGPoint) -> UIView?
     func dataItemAtPoint(_ point : CGPoint) -> AnyObject?
     func dragDataItem(_ item : AnyObject) -> Void
-    @objc optional func startDraggingAtPoint(_ point : CGPoint) -> Void
-    @objc optional func stopDragging() -> Void
+    
+    /* optional */ func startDraggingAtPoint(_ point : CGPoint) -> Void
+    /* optional */ func stopDragging() -> Void
+}
+
+extension KDDraggable {
+    func startDraggingAtPoint(_ point : CGPoint) -> Void {}
+    func stopDragging() -> Void {}
 }
 
 
-@objc protocol KDDroppable {
+protocol KDDroppable {
     func canDropAtRect(_ rect : CGRect) -> Bool
     func willMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void
     func didMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void
@@ -130,7 +136,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
             
         case .began :
             self.canvas.addSubview(bundle.representationImageView)
-            sourceDraggable.startDraggingAtPoint?(pointOnSourceDraggable)
+            sourceDraggable.startDraggingAtPoint(pointOnSourceDraggable)
             
         case .changed :
             
@@ -213,7 +219,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
             
             
             bundle.representationImageView.removeFromSuperview()
-            sourceDraggable.stopDragging?()
+            sourceDraggable.stopDragging()
             
         default:
             break

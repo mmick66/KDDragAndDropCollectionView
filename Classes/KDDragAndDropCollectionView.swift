@@ -25,9 +25,7 @@
 
 import UIKit
 
-
-
-@objc protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
+protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath?
     func collectionView(_ collectionView: UICollectionView, dataItemForIndexPath indexPath: IndexPath) -> AnyObject
