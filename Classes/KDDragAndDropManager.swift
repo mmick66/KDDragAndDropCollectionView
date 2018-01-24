@@ -145,9 +145,9 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
             repImgFrame.origin = CGPoint(x: pointOnCanvas.x - bundle.offset.x, y: pointOnCanvas.y - bundle.offset.y);
             bundle.representationImageView.frame = repImgFrame
             
-            var overlappingArea : CGFloat = 0.0
+            var overlappingAreaMAX: CGFloat = 0.0
             
-            var mainOverView : UIView?
+            var mainOverView: UIView?
             
             for view in self.views where view is KDDraggable  {
                 
@@ -163,12 +163,11 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                  * ██████████████████████████████████████████
                  */
                 
-                let intersectionNew = bundle.representationImageView.frame.intersection(viewFrameOnCanvas).size
+                let overlappingAreaCurrent = bundle.representationImageView.frame.intersection(viewFrameOnCanvas).area
                 
-                
-                if (intersectionNew.width * intersectionNew.height) > overlappingArea {
+                if overlappingAreaCurrent > overlappingAreaMAX {
                     
-                    overlappingArea = intersectionNew.width * intersectionNew.height
+                    overlappingAreaMAX = overlappingAreaCurrent
                     
                     mainOverView = view
                 }
@@ -245,3 +244,25 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     }
    
 }
+
+
+extension CGRect: Comparable {
+   
+    var area: CGFloat {
+        return self.size.width * self.size.height
+    }
+    
+    public static func <=(lhs: CGRect, rhs: CGRect) -> Bool {
+        return lhs.area <= rhs.area
+    }
+    public static func <(lhs: CGRect, rhs: CGRect) -> Bool {
+        return lhs.area < rhs.area
+    }
+    public static func >(lhs: CGRect, rhs: CGRect) -> Bool {
+        return lhs.area > rhs.area
+    }
+    public static func >=(lhs: CGRect, rhs: CGRect) -> Bool {
+        return lhs.area >= rhs.area
+    }
+}
+
