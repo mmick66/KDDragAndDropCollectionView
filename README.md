@@ -87,7 +87,25 @@ func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dat
 }
 ```
 
-## Data Items and Equatable
+## Advanced Use
+
+#### Prevent specific Items from being Dragged and/or Dropped
+
+Apart form the dataSource protocol that is implemented by the controller who owns the data that feeds the collection view, there are two more protocols of interest: `KDDraggable` and `KDDroppable`. These are implemented directly by the `KDDragAndDropCollectionView` and account for a finer control over what gets dragged where.
+
+The easier way to access them is to subclass `KDDragAndDropCollectionView` and overide the default implementation. For example, we might not want to drop a particular item from the view:
+
+```Swift
+class MyCV: KDDragAndDropCollectionView {
+    override func canDropAtRect(_ rect: CGRect) -> Bool {
+        let condition = /* custom logic that results to (for example) ... */ false
+        return super.canDropAtRect(rect) && condition
+    }
+}
+```
+
+
+#### Data Items and Equatable
 
 In the example code included in this project, I have created a `DataItem` class to represent the data displayed by the collection view.
 
