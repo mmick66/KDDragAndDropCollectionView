@@ -50,20 +50,7 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 }
 ```
 
-The only responsibility of the user code is to manage the data that the collection view cells are representing.  The data source of the collection views must implement 
-
-```Swift
-protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
-    
-    func collectionView(collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> NSIndexPath?
-    func collectionView(collectionView: UICollectionView, dataItemForIndexPath indexPath: NSIndexPath) -> AnyObject
-    
-    func collectionView(collectionView: UICollectionView, moveDataItemFromIndexPath from: NSIndexPath, toIndexPath to : NSIndexPath) -> Void
-    func collectionView(collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: NSIndexPath) -> Void
-    func collectionView(collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: NSIndexPath) -> Void
-    
-}
-```
+The only responsibility of the user code is to manage the data that the collection view cells are representing. The data source of the collection views must implement the `KDDragAndDropCollectionViewDataSource` protocol.
 
 In the example we have 3 UICollectionViews distinguishable by their tags (bad practice, I know... but it's only an example ;-) and a data array holding 3 arrays respectively. In a case like this, an implementation of the above could be:
 
