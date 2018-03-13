@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KDDragAndDropCollectionViews"
-  s.version      = "1.0"
+  s.version      = "1.1"
   s.summary      = "Dragging & Dropping data across multiple UICollectionViews"
 
   s.homepage     = "https://github.com/mmick66/KDDragAndDropCollectionView"

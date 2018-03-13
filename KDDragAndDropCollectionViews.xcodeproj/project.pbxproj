@@ -16,6 +16,7 @@
 		BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */; };
 		BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */; };
 		BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603DA1ADBE397005EE44C /* ColorCell.swift */; };
+		C7683C1C2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C1B2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KDDragAndDropManager.swift; path = ../Classes/KDDragAndDropManager.swift; sourceTree = "<group>"; };
 		BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KDDragAndDropCollectionView.swift; path = ../Classes/KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
 		BE3603DA1ADBE397005EE44C /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		C7683C1B2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */,
 				BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */,
+				C7683C1B2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift */,
 			);
 			name = KDDragAndDropCollectionViews;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				BE3603B81AD7DE06005EE44C /* ViewController.swift in Sources */,
 				BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */,
 				BE3603B61AD7DE06005EE44C /* AppDelegate.swift in Sources */,
+				C7683C1C2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

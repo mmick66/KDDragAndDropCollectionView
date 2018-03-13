@@ -1,7 +1,6 @@
 /*
  * KDDragAndDropCollectionView.swift
  * Created by Michael Michailidis on 10/04/2015.
- * http://blog.karmadust.com/
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,17 +23,6 @@
  */
 
 import UIKit
-
-public protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath?
-    func collectionView(_ collectionView: UICollectionView, dataItemForIndexPath indexPath: IndexPath) -> AnyObject
-    
-    func collectionView(_ collectionView: UICollectionView, moveDataItemFromIndexPath from: IndexPath, toIndexPath to : IndexPath) -> Void
-    func collectionView(_ collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: IndexPath) -> Void
-    func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: IndexPath) -> Void
-    
-}
 
 class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
 

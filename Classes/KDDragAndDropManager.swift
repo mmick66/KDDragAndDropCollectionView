@@ -1,7 +1,6 @@
 /*
  * KDDragAndDropManager.swift
  * Created by Michael Michailidis on 10/04/2015.
- * http://blog.karmadust.com/
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
