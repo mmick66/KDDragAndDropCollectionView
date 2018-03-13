@@ -16,9 +16,7 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 
 #### Cocoa Pods
 
-```
-pod 'KDDragAndDropCollectionViews', '~> 1.0'
-```
+I had problems integrating with Cocoa Pods so I have disabled it for the moment. Any help is welcome.
 
 #### Manual
 
