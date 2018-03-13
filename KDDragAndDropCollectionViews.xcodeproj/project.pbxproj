@@ -83,9 +83,9 @@
 		BE3603B21AD7DE06005EE44C /* KDDragAndDropCollectionViews */ = {
 			isa = PBXGroup;
 			children = (
-				BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */,
 				BE3603B51AD7DE06005EE44C /* AppDelegate.swift */,
 				BE3603B71AD7DE06005EE44C /* ViewController.swift */,
+				BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */,
 				BE3603DA1ADBE397005EE44C /* ColorCell.swift */,
 				BE3603B91AD7DE06005EE44C /* Main.storyboard */,
 				BE3603BC1AD7DE06005EE44C /* Images.xcassets */,

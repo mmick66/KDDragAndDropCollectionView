@@ -29,7 +29,7 @@ class DataItem : Equatable {
     
     var indexes: String
     var colour: UIColor
-    init(indexes: String, colour: UIColor = UIColor.clear) {
+    init(_ indexes: String, _ colour: UIColor = UIColor.clear) {
         self.indexes    = indexes
         self.colour     = colour
     }
@@ -38,6 +38,12 @@ class DataItem : Equatable {
         return lhs.indexes == rhs.indexes && lhs.colour == rhs.colour
     }
 }
+
+let colours : [UIColor] = [
+    UIColor(red: 53.0/255.0, green: 102.0/255.0, blue: 149.0/255.0, alpha: 1.0),
+    UIColor(red: 177.0/255.0, green: 88.0/255.0, blue: 39.0/255.0, alpha: 1.0),
+    UIColor(red: 138.0/255.0, green: 149.0/255.0, blue: 86.0/255.0, alpha: 1.0)
+]
 
 class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
@@ -53,30 +59,12 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         
         super.viewDidLoad()
         
-        let colours : [UIColor] = [
-            UIColor(red: 53.0/255.0, green: 102.0/255.0, blue: 149.0/255.0, alpha: 1.0),
-            UIColor(red: 177.0/255.0, green: 88.0/255.0, blue: 39.0/255.0, alpha: 1.0),
-            UIColor(red: 138.0/255.0, green: 149.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-        ]
-        
-        for i in 0...2 {
-            
-            var items = [DataItem]()
-            
-            for j in 0...20 {
-                
-                
-                let dataItem = DataItem(indexes: String(i) + ":" + String(j), colour: colours[i])
-                
-                items.append(dataItem)
-                
-            }
-            
-            data.append(items)
-        }
-        
-        
-        self.dragAndDropManager = KDDragAndDropManager(canvas: self.view, collectionViews: [firstCollectionView, secondCollectionView, thirdCollectionView])
+        self.data = (0...2).map({ i in (0...20).map({ j in DataItem("\(String(i)):\(String(j))", colours[i])})})
+     
+        self.dragAndDropManager = KDDragAndDropManager(
+            canvas: self.view,
+            collectionViews: [firstCollectionView, secondCollectionView, thirdCollectionView]
+        )
         
     }
 
