@@ -25,7 +25,7 @@
 
 import UIKit
 
-protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
+public protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, indexPathForDataItem dataItem: AnyObject) -> IndexPath?
     func collectionView(_ collectionView: UICollectionView, dataItemForIndexPath indexPath: IndexPath) -> AnyObject
@@ -54,7 +54,6 @@ class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-    
     }
     
 

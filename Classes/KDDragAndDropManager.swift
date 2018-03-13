@@ -25,7 +25,7 @@
 
 import UIKit
 
-protocol KDDraggable {
+public protocol KDDraggable {
     func canDragAtPoint(_ point : CGPoint) -> Bool
     func representationImageAtPoint(_ point : CGPoint) -> UIView?
     func dataItemAtPoint(_ point : CGPoint) -> AnyObject?

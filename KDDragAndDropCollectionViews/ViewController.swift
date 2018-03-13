@@ -39,11 +39,19 @@ class DataItem : Equatable {
     }
 }
 
-let colours : [UIColor] = [
-    UIColor(red: 53.0/255.0, green: 102.0/255.0, blue: 149.0/255.0, alpha: 1.0),
-    UIColor(red: 177.0/255.0, green: 88.0/255.0, blue: 39.0/255.0, alpha: 1.0),
-    UIColor(red: 138.0/255.0, green: 149.0/255.0, blue: 86.0/255.0, alpha: 1.0)
-]
+extension UIColor {
+    static var kdBrown:UIColor {
+        return UIColor(red: 177.0/255.0, green: 88.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+    }
+    static var kdGreen:UIColor {
+        return UIColor(red: 138.0/255.0, green: 149.0/255.0, blue: 86.0/255.0, alpha: 1.0)
+    }
+    static var kdBlue:UIColor {
+        return UIColor(red: 53.0/255.0, green: 102.0/255.0, blue: 149.0/255.0, alpha: 1.0)
+    }
+}
+
+let colours = [UIColor.kdBrown, UIColor.kdGreen, UIColor.kdBlue]
 
 class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
 
@@ -59,6 +67,7 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         
         super.viewDidLoad()
         
+        // generate some mock data (change in real world project)
         self.data = (0...2).map({ i in (0...20).map({ j in DataItem("\(String(i)):\(String(j))", colours[i])})})
      
         self.dragAndDropManager = KDDragAndDropManager(
