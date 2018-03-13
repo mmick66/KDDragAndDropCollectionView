@@ -13,10 +13,10 @@
 		BE3603BD1AD7DE06005EE44C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3603BC1AD7DE06005EE44C /* Images.xcassets */; };
 		BE3603C01AD7DE06005EE44C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3603BE1AD7DE06005EE44C /* LaunchScreen.xib */; };
 		BE3603CC1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */; };
-		BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */; };
-		BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */; };
 		BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603DA1ADBE397005EE44C /* ColorCell.swift */; };
-		C7683C1C2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C1B2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift */; };
+		C7683C272057DC5100EA7698 /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */; };
+		C7683C282057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C252057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift */; };
+		C7683C292057DC5100EA7698 /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +40,10 @@
 		BE3603C51AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KDDragAndDropCollectionViewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3603CA1AD7DE06005EE44C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewsTests.swift; sourceTree = "<group>"; };
-		BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KDDragAndDropManager.swift; path = ../Classes/KDDragAndDropManager.swift; sourceTree = "<group>"; };
-		BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KDDragAndDropCollectionView.swift; path = ../Classes/KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
 		BE3603DA1ADBE397005EE44C /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
-		C7683C1B2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KDDragAndDropCollectionViewDataSource.swift; path = ../Classes/KDDragAndDropCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
+		C7683C252057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +87,8 @@
 			children = (
 				BE3603B51AD7DE06005EE44C /* AppDelegate.swift */,
 				BE3603B71AD7DE06005EE44C /* ViewController.swift */,
-				BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */,
 				BE3603DA1ADBE397005EE44C /* ColorCell.swift */,
+				C7683C232057DC5100EA7698 /* Classes */,
 				BE3603B91AD7DE06005EE44C /* Main.storyboard */,
 				BE3603BC1AD7DE06005EE44C /* Images.xcassets */,
 				BE3603BE1AD7DE06005EE44C /* LaunchScreen.xib */,
@@ -122,15 +122,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BE3603D51AD7DE0B005EE44C /* KDDragAndDropCollectionViews */ = {
+		C7683C232057DC5100EA7698 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				BE3603D61AD7DE26005EE44C /* KDDragAndDropManager.swift */,
-				BE3603D81AD82D4F005EE44C /* KDDragAndDropCollectionView.swift */,
-				C7683C1B2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift */,
+				C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */,
+				C7683C252057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift */,
+				C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */,
 			);
-			name = KDDragAndDropCollectionViews;
-			sourceTree = "<group>";
+			path = Classes;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -238,12 +238,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE3603D91AD82D4F005EE44C /* KDDragAndDropCollectionView.swift in Sources */,
-				BE3603D71AD7DE26005EE44C /* KDDragAndDropManager.swift in Sources */,
+				C7683C282057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */,
+				C7683C272057DC5100EA7698 /* KDDragAndDropCollectionView.swift in Sources */,
 				BE3603B81AD7DE06005EE44C /* ViewController.swift in Sources */,
+				C7683C292057DC5100EA7698 /* KDDragAndDropManager.swift in Sources */,
 				BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */,
 				BE3603B61AD7DE06005EE44C /* AppDelegate.swift in Sources */,
-				C7683C1C2057C6C000EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
