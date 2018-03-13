@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/mmick66/KDDragAndDropCollectionView.git", :tag => s.version }
 
-  s.source_files = "Classes"
+  s.source_files = "Classes/*.swift"
 
 end

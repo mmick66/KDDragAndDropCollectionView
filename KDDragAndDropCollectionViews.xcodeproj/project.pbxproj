@@ -15,8 +15,9 @@
 		BE3603CC1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */; };
 		BE3603DB1ADBE397005EE44C /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3603DA1ADBE397005EE44C /* ColorCell.swift */; };
 		C7683C272057DC5100EA7698 /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */; };
-		C7683C282057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C252057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift */; };
 		C7683C292057DC5100EA7698 /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */; };
+		C7683C2A2057DD0200EA7698 /* KDDragAndDropCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */; };
+		C7683C2C2057DD0600EA7698 /* KDDragAndDropManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +43,6 @@
 		BE3603CB1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewsTests.swift; sourceTree = "<group>"; };
 		BE3603DA1ADBE397005EE44C /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionView.swift; sourceTree = "<group>"; };
-		C7683C252057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDragAndDropManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,9 +125,8 @@
 		C7683C232057DC5100EA7698 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */,
-				C7683C252057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift */,
 				C7683C262057DC5100EA7698 /* KDDragAndDropManager.swift */,
+				C7683C242057DC5100EA7698 /* KDDragAndDropCollectionView.swift */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -238,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7683C282057DC5100EA7698 /* KDDragAndDropCollectionViewDataSource.swift in Sources */,
 				C7683C272057DC5100EA7698 /* KDDragAndDropCollectionView.swift in Sources */,
 				BE3603B81AD7DE06005EE44C /* ViewController.swift in Sources */,
 				C7683C292057DC5100EA7698 /* KDDragAndDropManager.swift in Sources */,
@@ -251,6 +249,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7683C2A2057DD0200EA7698 /* KDDragAndDropCollectionView.swift in Sources */,
+				C7683C2C2057DD0600EA7698 /* KDDragAndDropManager.swift in Sources */,
 				BE3603CC1AD7DE06005EE44C /* KDDragAndDropCollectionViewsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
