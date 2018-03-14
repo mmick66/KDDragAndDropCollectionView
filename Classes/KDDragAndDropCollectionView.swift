@@ -35,7 +35,7 @@ public protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSour
     
 }
 
-open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
+public class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,7 +51,7 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
      
     }
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    override public init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
     }
     
@@ -155,12 +155,12 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
     
     // MARK : KDDroppable
 
-    func canDropAtRect(_ rect : CGRect) -> Bool {
+    public func canDropAtRect(_ rect : CGRect) -> Bool {
         
         return (self.indexPathForCellOverlappingRect(rect) != nil)
     }
     
-    func indexPathForCellOverlappingRect( _ rect : CGRect) -> IndexPath? {
+    public func indexPathForCellOverlappingRect( _ rect : CGRect) -> IndexPath? {
         
         var overlappingArea : CGFloat = 0.0
         var cellCandidate : UICollectionViewCell?
@@ -201,7 +201,7 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
     
     
     fileprivate var currentInRect : CGRect?
-    func willMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void {
+    public func willMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void {
         
         let dragDropDataSource = self.dataSource as! KDDragAndDropCollectionViewDataSource // its guaranteed to have a data source
         
@@ -240,13 +240,13 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
         
     }
     
-    var isHorizontal : Bool {
+    public var isHorizontal : Bool {
         return (self.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection == .horizontal
     }
     
-    var animating: Bool = false
+    public var animating: Bool = false
     
-    var paging : Bool = false
+    public var paging : Bool = false
     func checkForEdgesAndScroll(_ rect : CGRect) -> Void {
         
         if paging == true {
@@ -301,7 +301,7 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
         
     }
     
-    func didMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void {
+    public func didMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void {
         
         let dragDropDS = self.dataSource as! KDDragAndDropCollectionViewDataSource // guaranteed to have a ds
         
@@ -341,7 +341,7 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
         
     }
     
-    func didMoveOutItem(_ item : AnyObject) -> Void {
+    public func didMoveOutItem(_ item : AnyObject) -> Void {
         
         guard let dragDropDataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource,
               let existngIndexPath = dragDropDataSource.collectionView(self, indexPathForDataItem: item) else {
@@ -377,7 +377,7 @@ open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppab
     }
     
     
-    func dropDataItem(_ item : AnyObject, atRect : CGRect) -> Void {
+    public func dropDataItem(_ item : AnyObject, atRect : CGRect) -> Void {
         
         // show hidden cell
         if  let index = draggingPathOfCellBeingDragged,
