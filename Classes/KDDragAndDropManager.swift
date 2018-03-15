@@ -35,12 +35,12 @@ public protocol KDDraggable {
 }
 
 extension KDDraggable {
-    func startDraggingAtPoint(_ point : CGPoint) -> Void {}
-    func stopDragging() -> Void {}
+    public func startDraggingAtPoint(_ point : CGPoint) -> Void {}
+    public func stopDragging() -> Void {}
 }
 
 
-protocol KDDroppable {
+public protocol KDDroppable {
     func canDropAtRect(_ rect : CGRect) -> Bool
     func willMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void
     func didMoveItem(_ item : AnyObject, inRect rect : CGRect) -> Void
@@ -48,7 +48,7 @@ protocol KDDroppable {
     func dropDataItem(_ item : AnyObject, atRect : CGRect) -> Void
 }
 
-class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
+public class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     
     fileprivate var canvas : UIView = UIView()
     fileprivate var views : [UIView] = []
@@ -64,7 +64,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
     }
     var bundle : Bundle?
     
-    init(canvas : UIView, collectionViews : [UIView]) {
+    public init(canvas : UIView, collectionViews : [UIView]) {
         
         super.init()
         
@@ -78,7 +78,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         self.views = collectionViews
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
         guard gestureRecognizer.state == .possible else { return false }
         
@@ -120,7 +120,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         
     }
     
-    @objc func updateForLongPress(_ recogniser : UILongPressGestureRecognizer) -> Void {
+    @objc public func updateForLongPress(_ recogniser : UILongPressGestureRecognizer) -> Void {
         
         guard let bundle = self.bundle else { return }
         
@@ -245,7 +245,7 @@ class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
 
 extension CGRect: Comparable {
    
-    var area: CGFloat {
+    public var area: CGFloat {
         return self.size.width * self.size.height
     }
     
