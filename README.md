@@ -20,7 +20,7 @@ pod 'KDDragAndDropCollectionViews', '~> 1.3'
 ```
 #### Manual
 
-Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your project.
+Add the files in `Classes/` to your project.
 
 ## Quick Guide
 
