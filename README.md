@@ -15,9 +15,9 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 ## Installation
 
 #### Cocoa Pods
-
-I had problems integrating with Cocoa Pods so I have disabled it for the moment. Any help is welcome.
-
+```
+pod 'KDDragAndDropCollectionViews', '~> 1.3'
+```
 #### Manual
 
 Add `KDDragAndDropManager.swift` and `KDDragAndDropCollectionView.swift` to your project.
