@@ -1,10 +1,15 @@
-## Drag and Drop Collection Views 
+# Drag and Drop Collection Views 
 
 Written for Swift 4.0, it is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
 
 ![Drag and Drop Illustration](http://s27.postimg.org/geseg5j03/image.png "Drag and Drop")
 
 Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3)
+
+[![Language](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
+[![Licence](https://img.shields.io/dub/l/vibe-d.svg?maxAge=2592000)](https://opensource.org/licenses/MIT)
+[![CocoaPods](https://img.shields.io/cocoapods/v/KDDragAndDropCollectionViews.svg?style=flat)](https://cocoapods.org/pods/KDDragAndDropCollectionViews)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vsouza/awesome-ios)
 
 ## Requirements
 
