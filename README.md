@@ -126,15 +126,3 @@ class DataItem : Equatable {
 ```
 
 In the course of development you will be making your own types that must comform to the `Equatable` protocol as above. Each data item must be **uniquely idenfyiable** so be careful when creating cells that can have duplicate display values as for example a ["Scrabble"](https://en.wikipedia.org/wiki/Scrabble) type game where the same letter appears more than once. In cases like these, a simple identifier will do to implement the equality.
-
-## License 
-
-The MIT License (MIT)
-
-Copyright (c) 2015 Karmadust Ltd.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
