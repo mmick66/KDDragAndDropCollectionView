@@ -32,7 +32,7 @@ public protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, moveDataItemFromIndexPath from: IndexPath, toIndexPath to : IndexPath) -> Void
     func collectionView(_ collectionView: UICollectionView, insertDataItem dataItem : AnyObject, atIndexPath indexPath: IndexPath) -> Void
     func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: IndexPath) -> Void
-    
+    func collectionView(_ collectionView: UICollectionView, cellIsDraggableAtIndexPath indexPath: IndexPath) -> Bool
 }
 
 public class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
@@ -58,12 +58,12 @@ public class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDropp
 
     // MARK : KDDraggable
     public func canDragAtPoint(_ point : CGPoint) -> Bool {
-        
-        if self.dataSource is KDDragAndDropCollectionViewDataSource {
-            return self.indexPathForItem(at: point) != nil
+        if let dataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource,
+        let indexPathOfPoint = self.indexPathForItem(at: point) {
+            return dataSource.collectionView(self, cellIsDraggableAtIndexPath: indexPathOfPoint)
         }
+
         return false
-        
     }
     
     public func representationImageAtPoint(_ point : CGPoint) -> UIView? {
