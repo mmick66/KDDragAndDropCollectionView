@@ -2,7 +2,7 @@
 
 Written for Swift 4.0, it is an implementation of Dragging and Dropping data across multiple UICollectionViews. 
 
-![Drag and Drop Illustration](http://s27.postimg.org/geseg5j03/image.png "Drag and Drop")
+![Drag and Drop Illustration](http://s27.postimg.cc/geseg5j03/image.png "Drag and Drop")
 
 Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3)
 
