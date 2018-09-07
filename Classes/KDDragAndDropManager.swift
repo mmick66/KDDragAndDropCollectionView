@@ -27,6 +27,7 @@ import UIKit
 public protocol KDDraggable {
     func canDragAtPoint(_ point : CGPoint) -> Bool
     func representationImageAtPoint(_ point : CGPoint) -> UIView?
+    func stylingRepresentationView(_ view: UIView) -> UIView?
     func dataItemAtPoint(_ point : CGPoint) -> AnyObject?
     func dragDataItem(_ item : AnyObject) -> Void
     
@@ -85,16 +86,18 @@ public class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         for view in self.views where view is KDDraggable  {
             
             let draggable = view as! KDDraggable
-                
+            
             let touchPointInView = touch.location(in: view)
             
             guard draggable.canDragAtPoint(touchPointInView) == true else { continue }
             
-            guard let representation = draggable.representationImageAtPoint(touchPointInView) else { continue }
+            guard var representation = draggable.representationImageAtPoint(touchPointInView) else { continue }
             
             representation.frame = self.canvas.convert(representation.frame, from: view)
-            
-            representation.alpha = 0.7
+            representation.alpha = 0.5
+            if let decoredView = draggable.stylingRepresentationView(representation) {
+                representation = decoredView
+            }
             
             let pointOnCanvas = touch.location(in: self.canvas)
             
@@ -210,7 +213,6 @@ public class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
                 }
             }
             
-            
             bundle.representationImageView.removeFromSuperview()
             sourceDraggable.stopDragging()
             
@@ -221,7 +223,7 @@ public class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         
     }
     
-    // MARK: Helper Methods 
+    // MARK: Helper Methods
     func convertRectToCanvas(_ rect : CGRect, fromView view : UIView) -> CGRect {
         
         var r = rect
@@ -239,12 +241,12 @@ public class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         
         return r
     }
-   
+    
 }
 
 
 extension CGRect: Comparable {
-   
+    
     public var area: CGFloat {
         return self.size.width * self.size.height
     }
