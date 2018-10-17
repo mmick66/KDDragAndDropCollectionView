@@ -148,10 +148,8 @@ class ViewController: UIViewController, KDDragAndDropCollectionViewDataSource {
         return nil
         
     }
+    
 
-    func collectionView(_ collectionView: UICollectionView, cellIsDraggableAtIndexPath indexPath: IndexPath) -> Bool {
-        return indexPath.row % 2 == 0
-    }
 }
 
 
