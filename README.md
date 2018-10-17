@@ -8,6 +8,7 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 
 [![Language](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
 [![Licence](https://img.shields.io/dub/l/vibe-d.svg?maxAge=2592000)](https://opensource.org/licenses/MIT)
+[![CocoaPods](https://img.shields.io/cocoapods/v/KDCalendar.svg?style=flat)](https://cocoapods.org/pods/KDDragAndDropCollectionViews)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vsouza/awesome-ios)
 
 ## Requirements
