@@ -34,7 +34,14 @@ public protocol KDDragAndDropCollectionViewDataSource : UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, deleteDataItemAtIndexPath indexPath: IndexPath) -> Void
     func collectionView(_ collectionView: UICollectionView, cellIsDraggableAtIndexPath indexPath: IndexPath) -> Bool
     func collectionView(_ collectionView: UICollectionView, cellIsDroppableAtIndexPath indexPath: IndexPath) -> Bool
-    func collectionView(_ collectionView: UICollectionView, stylingRepresentationView: UIView) -> UIView?
+    
+    /* optional */ func collectionView(_ collectionView: UICollectionView, stylingRepresentationView: UIView) -> UIView?
+}
+
+extension KDDragAndDropCollectionViewDataSource {
+    public func collectionView(_ collectionView: UICollectionView, stylingRepresentationView: UIView) -> UIView? {
+        return nil
+    }
 }
 
 public class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
@@ -90,10 +97,10 @@ public class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDropp
     }
     
     public func stylingRepresentationView(_ view: UIView) -> UIView? {
-        guard let datasource = self.dataSource as? KDDragAndDropCollectionViewDataSource else {
+        guard let dataSource = self.dataSource as? KDDragAndDropCollectionViewDataSource else {
             return nil
         }
-        return datasource.collectionView(self, stylingRepresentationView: view)
+        return dataSource.collectionView(self, stylingRepresentationView: view)
     }
     
     public func dataItemAtPoint(_ point : CGPoint) -> AnyObject? {
