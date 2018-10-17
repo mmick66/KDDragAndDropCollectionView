@@ -20,7 +20,7 @@ Try it on [Appetize.io!](https://appetize.io/embed/exaf5fdj5auryhu174ta69t1gm?de
 
 #### Cocoa Pods
 ```
-pod 'KDDragAndDropCollectionViews', '~> 1.4'
+pod 'KDDragAndDropCollectionViews', '~> 1.5.1'
 ```
 #### Manual
 
