@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
 
   s.author       = "Michael Michailidis"
 
+  s.swift_version = "4.2"
   s.platform     = :ios, "9.0"
 
   s.source       = { :git => "https://github.com/mmick66/KDDragAndDropCollectionView.git", :tag => s.version }
