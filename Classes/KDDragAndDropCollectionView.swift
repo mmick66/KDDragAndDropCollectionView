@@ -51,7 +51,7 @@ extension KDDragAndDropCollectionViewDataSource {
     }
 }
 
-public class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
+open class KDDragAndDropCollectionView: UICollectionView, KDDraggable, KDDroppable {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
