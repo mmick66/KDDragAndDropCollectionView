@@ -127,7 +127,7 @@ public class KDDragAndDropManager: NSObject, UIGestureRecognizerDelegate {
         
         guard let bundle = self.bundle else { return }
         
-        let pointOnCanvas = recogniser.location(in: recogniser.view)
+        let pointOnCanvas = recogniser.location(in: self.canvas)
         let sourceDraggable : KDDraggable = bundle.sourceDraggableView as! KDDraggable
         let pointOnSourceDraggable = recogniser.location(in: bundle.sourceDraggableView)
         
